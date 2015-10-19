@@ -9,3 +9,14 @@ C:\Websites\OpeningHours\OpeningHours.Umbraco.Source\bin\umbraco.dll
 C:\Websites\OpeningHours\OpeningHours.Umbraco.Source\bin\Newtonsoft.Json.xml
 C:\Websites\OpeningHours\OpeningHours.Umbraco.Source\obj\Debug\OpeningHours.Umbraco.Source.dll
 C:\Websites\OpeningHours\OpeningHours.Umbraco.Source\obj\Debug\OpeningHours.Umbraco.Source.pdb
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\bin\OpeningHours.Umbraco.Source.dll
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\bin\OpeningHours.Umbraco.Source.pdb
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\bin\Newtonsoft.Json.dll
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\bin\System.Web.Http.dll
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\bin\System.Web.Mvc.dll
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\bin\Umbraco.Core.dll
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\bin\umbraco.dll
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\bin\Newtonsoft.Json.xml
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\obj\Debug\OpeningHours.Umbraco.Source.csprojResolveAssemblyReference.cache
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\obj\Debug\OpeningHours.Umbraco.Source.dll
+C:\Websites\umbOpeningHours\OpeningHours.Umbraco.Source\obj\Debug\OpeningHours.Umbraco.Source.pdb

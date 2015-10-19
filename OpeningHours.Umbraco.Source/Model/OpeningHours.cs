@@ -38,6 +38,9 @@ namespace OpeningHours.Umbraco.Source.Model
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
             Dictionary<string, string> tmp = new Dictionary<string, string>();
+
+            string timeFormat = includeMinutes ? "{0:hh\\:mm}-{1:hh\\:mm}" : "{0:hh}-{1:hh}";
+
             foreach (WeekDay day in WeekDays)
             {
                 if (day.ClosedThisDay)
@@ -56,10 +59,7 @@ namespace OpeningHours.Umbraco.Source.Model
                 }
                 else
                 {
-                    if (includeMinutes)
-                        tmp.Add(day.Label, string.Format("{0:hh\\:mm}-{1:hh\\:mm}", day.Open, day.Closed));
-                    else
-                        tmp.Add(day.Label, string.Format("{0:hh}-{1:hh}", day.Open, day.Closed));
+                    tmp.Add(day.Label, string.Format(timeFormat, day.Open, day.Closed));
                 }
             }
 
@@ -89,15 +89,13 @@ namespace OpeningHours.Umbraco.Source.Model
                 {
                     if (FirstSunDayInMonth.Open == LastSundayInMonth.Open && FirstSunDayInMonth.Closed == LastSundayInMonth.Closed)
                     {
-                        if (includeMinutes)
-                            result.Add("First and last sunday in month", string.Format("{0:hh\\:mm}-{1:hh\\:mm}", FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
-                        else
-                            result.Add("First and last sunday in month", string.Format("{0:hh}-{1:hh}", FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
+                        result.Add("First and last sunday in month", string.Format(timeFormat, FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
+
                     }
                     else
                     {
-                        result.Add("Første søndag i mdr.", string.Format("{0:hh\\:mm}-{1:hh\\:mm}", FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
-                        result.Add("Sidste søndag i mdr.", string.Format("{0:hh\\:mm}-{1:hh\\:mm}", LastSundayInMonth.Open, LastSundayInMonth.Closed));
+                        result.Add("First sunday in month", string.Format(timeFormat, FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
+                        result.Add("Last sunday in month", string.Format(timeFormat, LastSundayInMonth.Open, LastSundayInMonth.Closed));
                     }
                 }
 
@@ -110,12 +108,7 @@ namespace OpeningHours.Umbraco.Source.Model
                         result.Add("First sunday in month", "Closed");
                     else
                     {
-                        if (includeMinutes)
-                            result.Add("First sunday in month",
-                                string.Format("{0:hh\\:mm}-{1:hh\\:mm}", FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
-                        else
-                            result.Add("First sunday in month",
-                                string.Format("{0:hh}-{1:hh}", FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
+                        result.Add("First sunday in month", string.Format(timeFormat, FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
                     }
 
                 // Last sunday of month
@@ -125,12 +118,7 @@ namespace OpeningHours.Umbraco.Source.Model
                         result.Add("Last sunday in month", "Closed");
                     else
                     {
-                        if (includeMinutes)
-                            result.Add("Last sunday in month",
-                                string.Format("{0:hh\\:mm}-{1:hh\\:mm}", LastSundayInMonth.Open, LastSundayInMonth.Closed));
-                        else
-                            result.Add("Last sunday in month",
-                                string.Format("{0:hh}-{1:hh}", LastSundayInMonth.Open, LastSundayInMonth.Closed));
+                        result.Add("Last sunday in month", string.Format(timeFormat, LastSundayInMonth.Open, LastSundayInMonth.Closed));
                     }
                 }
             }
@@ -147,6 +135,8 @@ namespace OpeningHours.Umbraco.Source.Model
         {
             DateTime now = DateTime.Now;
 
+            string timeFormat = includeMinutes ? "{0:hh\\:mm}-{1:hh\\:mm}" : "{0:hh}-{1:hh}";
+
             // Get current day name
             string dayName = now.ToString("dddd");
 
@@ -162,10 +152,7 @@ namespace OpeningHours.Umbraco.Source.Model
                 // If today is not closed, use the selected open and closing hours
                 if (now.TimeOfDay >= specificOpeningHoursToday.Open && now.TimeOfDay <= specificOpeningHoursToday.Closed)
                 {
-                    if (includeMinutes)
-                        return string.Format("{0:hh\\:mm}-{1:hh\\:mm}", specificOpeningHoursToday.Open, specificOpeningHoursToday.Closed);
-
-                    return string.Format("{0:hh}-{1:hh}", specificOpeningHoursToday.Open, specificOpeningHoursToday.Closed);
+                    return string.Format(timeFormat, specificOpeningHoursToday.Open, specificOpeningHoursToday.Closed);
                 }
             }
             else
@@ -182,10 +169,7 @@ namespace OpeningHours.Umbraco.Source.Model
 
                     if (now.TimeOfDay >= FirstSunDayInMonth.Open && now.TimeOfDay <= FirstSunDayInMonth.Closed)
                     {
-                        if (includeMinutes)
-                            return string.Format("{0:hh\\:mm}-{1:hh\\:mm}", FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed);
-
-                        return string.Format("{0:hh}-{1:hh}", FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed);
+                        return string.Format(timeFormat, FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed);
                     }
                 }
 
@@ -198,10 +182,7 @@ namespace OpeningHours.Umbraco.Source.Model
 
                     if (now.TimeOfDay >= LastSundayInMonth.Open && now.TimeOfDay <= LastSundayInMonth.Closed)
                     {
-                        if (includeMinutes)
-                            return string.Format("{0:hh\\:mm}-{1:hh\\:mm}", LastSundayInMonth.Open, LastSundayInMonth.Closed);
-
-                        return string.Format("{0:hh}-{1:hh}", LastSundayInMonth.Open, LastSundayInMonth.Closed);
+                        return string.Format(timeFormat, LastSundayInMonth.Open, LastSundayInMonth.Closed);
                     }
                 }
 
@@ -219,10 +200,7 @@ namespace OpeningHours.Umbraco.Source.Model
                     // If today is not closed, compare the open and closed times with current time
                     if (now.TimeOfDay >= openingHour.Open && now.TimeOfDay <= openingHour.Closed)
                     {
-                        if (includeMinutes)
-                            return string.Format("{0:hh\\:mm}-{1:hh\\:mm}", openingHour.Open, openingHour.Closed);
-
-                        return string.Format("{0:hh}-{1:hh}", openingHour.Open, openingHour.Closed);
+                        return string.Format(timeFormat, openingHour.Open, openingHour.Closed);
                     }
                 }
             }
