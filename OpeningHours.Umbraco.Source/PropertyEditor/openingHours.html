@@ -1,0 +1,127 @@
+﻿<div ng-controller="openingHours.controller">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            General opening hours (weekdays)
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed week-days-table">
+                <tr>
+                    <th></th>
+                    <th>Open</th>
+                    <th>Closed</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="weekDay in model.value.weekDays">
+                    <td class="week-day-text">
+                        <div class="shop-closed-overlay" ng-show="weekDay.closedThisDay"></div>
+                        {{ weekDay.label }}
+                    </td>
+                    <td class="open-col">
+                        <div class="shop-closed-overlay" ng-show="weekDay.closedThisDay"></div>
+                        <umb-editor model="weekDay.open"></umb-editor>
+                    </td>
+                    <td class="open-col">
+                        <div class="shop-closed-overlay" ng-show="weekDay.closedThisDay"></div>
+                        <umb-editor model="weekDay.closed"></umb-editor>
+
+                    </td>
+                    <td class="week-day-text closed-this-day"><input type="checkbox" ng-model="weekDay.closedThisDay" /> <span>Closed for the day</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            First and/or last sunday in month
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed week-days-table">
+                <tr>
+                    <td class="week-day-text">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" ng-model="model.value.firstSundayInMonth.isActive" /> <span>Open first sunday in month</span>
+                        </div>
+                    </td>
+                    <td class="open-col">
+                        <div class="open-hours-wrapper" ng-show="model.value.firstSundayInMonth.isActive">
+                            <span class="week-day-label">Open:</span>
+                            <umb-editor model="model.value.firstSundayInMonth.open"></umb-editor>
+                        </div>
+                    </td>
+                    <td class="open-col">
+                        <div class="open-hours-wrapper" ng-show="model.value.firstSundayInMonth.isActive">
+                            <span class="week-day-label">Closed:</span>
+                            <umb-editor model="model.value.firstSundayInMonth.closed"></umb-editor>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-day-text">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" ng-model="model.value.lastSundayInMonth.isActive" /> <span>Open last sunday in month</span>
+                        </div>
+                    </td>
+                    <td class="open-col">
+                        <div class="open-hours-wrapper" ng-show="model.value.lastSundayInMonth.isActive">
+                            <span class="week-day-label">open:</span>
+                            <umb-editor model="model.value.lastSundayInMonth.open"></umb-editor>
+                        </div>
+                    </td>
+                    <td class="open-col">
+                        <div class="open-hours-wrapper" ng-show="model.value.lastSundayInMonth.isActive">
+                            <span class="week-day-label">Closed:</span>
+                            <umb-editor model="model.value.lastSundayInMonth.closed"></umb-editor>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Specific opening hours (i.e. holidays)
+        </div>
+        <div class="panel-body">
+            <a class="btn btn-success btn-add-opening-hours" ng-click="createNewOpeningDay();"><i class="icon icon-add"></i> Create</a>
+            <br />
+            <table class="table table-condensed week-days-table" ng-show="model.value.specificDays.length > 0">
+                <tr>
+                    <th>Text</th>
+                    <th>Choose date</th>
+                    <th>Open</th>
+                    <th>Closed</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="day in model.value.specificDays">
+                    <td class="valign-middle">
+                        <input type="text" ng-model="day.text" placeholder="I.e. 'Christmas Day'" />
+                    </td>
+                    <td>
+                        <div class="datepicker-wrapper">
+                            <umb-editor model="day.selectedDate"></umb-editor>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="shop-closed-overlay" ng-show="day.closedThisDay"></div>
+                        <umb-editor model="day.open"></umb-editor>
+                    </td>
+                    <td>
+                        <div class="shop-closed-overlay" ng-show="day.closedThisDay"></div>
+                        <umb-editor model="day.closed"></umb-editor>
+                    </td>
+                    <td class="week-day-text">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" ng-model="day.closedThisDay" /> <span>Closed for the day</span>
+                        </div>
+                    </td>
+                    <td class="closed-this-day">
+                        <a class="btn btn-danger" ng-click="deleteOpeningDay(day);"><i class="icon icon-delete"></i> Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

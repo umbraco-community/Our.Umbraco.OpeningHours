@@ -1,0 +1,17 @@
+{       
+    propertyEditors: [      
+        {            
+            alias: "OpeningHours",            
+            name: "Opening hours",            
+            editor: {
+                view: "~/App_Plugins/OpeningHours/openingHours.html",
+				hideLabel: true,
+				valueType: "JSON"
+            }
+        }
+    ]
+    ,    
+    javascript: [
+        '~/App_Plugins/OpeningHours/openingHours.controller.js'		
+    ]
+}
