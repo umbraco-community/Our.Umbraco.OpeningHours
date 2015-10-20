@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace OpeningHours.Umbraco.Source.Model
+namespace Our.Umbraco.OpeningHours.Model
 {
     public class SpecificDay : WeekDay
     {

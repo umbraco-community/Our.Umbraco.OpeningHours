@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using OpeningHours.Umbraco.Source.Extensions;
+using Our.Umbraco.OpeningHours.Extensions;
 
-namespace OpeningHours.Umbraco.Source.Model
+namespace Our.Umbraco.OpeningHours.Model
 {
     public class OpeningHours
     {
@@ -23,10 +23,10 @@ namespace OpeningHours.Umbraco.Source.Model
 
         public OpeningHours()
         {
-            WeekDays = new List<WeekDay>();
-            SpecificDays = new List<SpecificDay>();
-            FirstSunDayInMonth = new FirstSundayInMonth();
-            LastSundayInMonth = new LastSundayInMonth();
+            this.WeekDays = new List<WeekDay>();
+            this.SpecificDays = new List<SpecificDay>();
+            this.FirstSunDayInMonth = new FirstSundayInMonth();
+            this.LastSundayInMonth = new LastSundayInMonth();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace OpeningHours.Umbraco.Source.Model
 
             string timeFormat = includeMinutes ? "{0:hh\\:mm}-{1:hh\\:mm}" : "{0:hh}-{1:hh}";
 
-            foreach (WeekDay day in WeekDays)
+            foreach (WeekDay day in this.WeekDays)
             {
                 if (day.ClosedThisDay)
                 {
@@ -51,7 +51,7 @@ namespace OpeningHours.Umbraco.Source.Model
                     }
                     else
                     {
-                        if (!FirstSunDayInMonth.IsActive && !LastSundayInMonth.IsActive)
+                        if (!this.FirstSunDayInMonth.IsActive && !this.LastSundayInMonth.IsActive)
                         {
                             tmp.Add(day.Label, "Closed");
                         }
@@ -81,21 +81,21 @@ namespace OpeningHours.Umbraco.Source.Model
             }
 
             // First and last sunday of month
-            if ((FirstSunDayInMonth.IsActive && LastSundayInMonth.IsActive))
+            if ((this.FirstSunDayInMonth.IsActive && this.LastSundayInMonth.IsActive))
             {
-                if (FirstSunDayInMonth.ClosedThisDay && LastSundayInMonth.ClosedThisDay)
+                if (this.FirstSunDayInMonth.ClosedThisDay && this.LastSundayInMonth.ClosedThisDay)
                     result.Add("First and last sunday in month", "Closed");
                 else
                 {
-                    if (FirstSunDayInMonth.Open == LastSundayInMonth.Open && FirstSunDayInMonth.Closed == LastSundayInMonth.Closed)
+                    if (this.FirstSunDayInMonth.Open == this.LastSundayInMonth.Open && this.FirstSunDayInMonth.Closed == this.LastSundayInMonth.Closed)
                     {
-                        result.Add("First and last sunday in month", string.Format(timeFormat, FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
+                        result.Add("First and last sunday in month", string.Format(timeFormat, this.FirstSunDayInMonth.Open, this.FirstSunDayInMonth.Closed));
 
                     }
                     else
                     {
-                        result.Add("First sunday in month", string.Format(timeFormat, FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
-                        result.Add("Last sunday in month", string.Format(timeFormat, LastSundayInMonth.Open, LastSundayInMonth.Closed));
+                        result.Add("First sunday in month", string.Format(timeFormat, this.FirstSunDayInMonth.Open, this.FirstSunDayInMonth.Closed));
+                        result.Add("Last sunday in month", string.Format(timeFormat, this.LastSundayInMonth.Open, this.LastSundayInMonth.Closed));
                     }
                 }
 
@@ -103,22 +103,22 @@ namespace OpeningHours.Umbraco.Source.Model
             else
             {
                 // First sunday of month
-                if (FirstSunDayInMonth.IsActive)
-                    if (FirstSunDayInMonth.ClosedThisDay)
+                if (this.FirstSunDayInMonth.IsActive)
+                    if (this.FirstSunDayInMonth.ClosedThisDay)
                         result.Add("First sunday in month", "Closed");
                     else
                     {
-                        result.Add("First sunday in month", string.Format(timeFormat, FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed));
+                        result.Add("First sunday in month", string.Format(timeFormat, this.FirstSunDayInMonth.Open, this.FirstSunDayInMonth.Closed));
                     }
 
                 // Last sunday of month
-                if (LastSundayInMonth.IsActive)
+                if (this.LastSundayInMonth.IsActive)
                 {
-                    if (LastSundayInMonth.ClosedThisDay)
+                    if (this.LastSundayInMonth.ClosedThisDay)
                         result.Add("Last sunday in month", "Closed");
                     else
                     {
-                        result.Add("Last sunday in month", string.Format(timeFormat, LastSundayInMonth.Open, LastSundayInMonth.Closed));
+                        result.Add("Last sunday in month", string.Format(timeFormat, this.LastSundayInMonth.Open, this.LastSundayInMonth.Closed));
                     }
                 }
             }
@@ -141,7 +141,7 @@ namespace OpeningHours.Umbraco.Source.Model
             string dayName = now.ToString("dddd");
 
             // First, check to make sure there's no specific opening hours today
-            SpecificDay specificOpeningHoursToday = SpecificDays.FirstOrDefault(x => x.SelectedDate.Date == now.Date);
+            SpecificDay specificOpeningHoursToday = this.SpecificDays.FirstOrDefault(x => x.SelectedDate.Date == now.Date);
 
             if (specificOpeningHoursToday != null)
             {
@@ -162,34 +162,34 @@ namespace OpeningHours.Umbraco.Source.Model
                 DateTime firstSundayOfMonth = now.GetFirstSundayOfMonth();
 
                 // Check if today is the first sunday of the month
-                if (firstSundayOfMonth.Date == now.Date && FirstSunDayInMonth.IsActive)
+                if (firstSundayOfMonth.Date == now.Date && this.FirstSunDayInMonth.IsActive)
                 {
-                    if (FirstSunDayInMonth.ClosedThisDay)
+                    if (this.FirstSunDayInMonth.ClosedThisDay)
                         return string.Empty;
 
-                    if (now.TimeOfDay >= FirstSunDayInMonth.Open && now.TimeOfDay <= FirstSunDayInMonth.Closed)
+                    if (now.TimeOfDay >= this.FirstSunDayInMonth.Open && now.TimeOfDay <= this.FirstSunDayInMonth.Closed)
                     {
-                        return string.Format(timeFormat, FirstSunDayInMonth.Open, FirstSunDayInMonth.Closed);
+                        return string.Format(timeFormat, this.FirstSunDayInMonth.Open, this.FirstSunDayInMonth.Closed);
                     }
                 }
 
                 // Last sunday of month check
                 DateTime lastSundayInMonth = now.GetLastWeekDayOfMonth(DayOfWeek.Sunday);
-                if (lastSundayInMonth.Date == now.Date && LastSundayInMonth.IsActive)
+                if (lastSundayInMonth.Date == now.Date && this.LastSundayInMonth.IsActive)
                 {
-                    if (LastSundayInMonth.ClosedThisDay)
+                    if (this.LastSundayInMonth.ClosedThisDay)
                         return string.Empty;
 
-                    if (now.TimeOfDay >= LastSundayInMonth.Open && now.TimeOfDay <= LastSundayInMonth.Closed)
+                    if (now.TimeOfDay >= this.LastSundayInMonth.Open && now.TimeOfDay <= this.LastSundayInMonth.Closed)
                     {
-                        return string.Format(timeFormat, LastSundayInMonth.Open, LastSundayInMonth.Closed);
+                        return string.Format(timeFormat, this.LastSundayInMonth.Open, this.LastSundayInMonth.Closed);
                     }
                 }
 
                 // If no specific opening hour was found for todays date, use opening hours from the week days
 
                 // Find opening hours for today
-                var openingHour = WeekDays.FirstOrDefault(x => x.DayOfWeek.ToLower().Equals(dayName.ToLower()));
+                var openingHour = this.WeekDays.FirstOrDefault(x => x.DayOfWeek.ToLower().Equals(dayName.ToLower()));
 
                 if (openingHour != null)
                 {
@@ -220,7 +220,7 @@ namespace OpeningHours.Umbraco.Source.Model
             DateTime tomorrow = now.AddDays(1);
 
             // Check specific opening days
-            SpecificDay day = SpecificDays.FirstOrDefault(x => x.SelectedDate.Date == tomorrow.Date);
+            SpecificDay day = this.SpecificDays.FirstOrDefault(x => x.SelectedDate.Date == tomorrow.Date);
 
             if (day != null)
             {
@@ -235,29 +235,29 @@ namespace OpeningHours.Umbraco.Source.Model
                 DateTime firstSundayInMonth = now.GetFirstSundayOfMonth();
                 DateTime lastSundayInMonth = now.GetLastWeekDayOfMonth(DayOfWeek.Sunday);
 
-                if (tomorrow.Date == firstSundayInMonth.Date && FirstSunDayInMonth.IsActive)
-                    return string.Format(resultFormat, FirstSunDayInMonth.Label.ToLower(), FirstSunDayInMonth.Open);
+                if (tomorrow.Date == firstSundayInMonth.Date && this.FirstSunDayInMonth.IsActive)
+                    return string.Format(resultFormat, this.FirstSunDayInMonth.Label.ToLower(), this.FirstSunDayInMonth.Open);
 
                 if (tomorrow.Date == lastSundayInMonth.Date)
-                    return string.Format(resultFormat, LastSundayInMonth.Label.ToLower(), LastSundayInMonth.Open);
+                    return string.Format(resultFormat, this.LastSundayInMonth.Label.ToLower(), this.LastSundayInMonth.Open);
             }
             else
             {
                 // Get week day
-                WeekDay currentWeekDay = WeekDays.FirstOrDefault(x => x.DayOfWeek == now.DayOfWeek.ToString());
+                WeekDay currentWeekDay = this.WeekDays.FirstOrDefault(x => x.DayOfWeek == now.DayOfWeek.ToString());
 
                 // Search forward in the array
-                for (int i = WeekDays.IndexOf(currentWeekDay) + 1; i < WeekDays.Count() - 1; i++)
+                for (int i = this.WeekDays.IndexOf(currentWeekDay) + 1; i < this.WeekDays.Count() - 1; i++)
                 {
-                    WeekDay nextWeekDay = WeekDays[i];
+                    WeekDay nextWeekDay = this.WeekDays[i];
                     if (!nextWeekDay.ClosedThisDay)
                         return string.Format(resultFormat, nextWeekDay.Label.ToLower(), nextWeekDay.Open);
                 }
 
                 // Search from the start of the week days array and to the current week day
-                for (int i = 0; i < WeekDays.IndexOf(currentWeekDay); i++)
+                for (int i = 0; i < this.WeekDays.IndexOf(currentWeekDay); i++)
                 {
-                    WeekDay nextWeekDay = WeekDays[i];
+                    WeekDay nextWeekDay = this.WeekDays[i];
                     if (!nextWeekDay.ClosedThisDay)
                         return string.Format(resultFormat, nextWeekDay.Label.ToLower(), nextWeekDay.Open);
                 }
@@ -276,7 +276,7 @@ namespace OpeningHours.Umbraco.Source.Model
             DateTime now = DateTime.Now;
 
             // Check if any specific opening hour is today
-            SpecificDay today = SpecificDays.FirstOrDefault(x => x.SelectedDate.Date == now.Date);
+            SpecificDay today = this.SpecificDays.FirstOrDefault(x => x.SelectedDate.Date == now.Date);
 
             if (today != null)
             {
@@ -291,15 +291,15 @@ namespace OpeningHours.Umbraco.Source.Model
                 DateTime firstSundayInMonth = now.GetFirstSundayOfMonth();
                 DateTime lastSundayInMonth = now.GetLastWeekDayOfMonth(DayOfWeek.Sunday);
 
-                if (now.Date == firstSundayInMonth.Date && FirstSunDayInMonth.IsActive && FirstSunDayInMonth.Open > now.TimeOfDay && !FirstSunDayInMonth.ClosedThisDay)
-                    return string.Format(resultFormat, FirstSunDayInMonth.Open);
+                if (now.Date == firstSundayInMonth.Date && this.FirstSunDayInMonth.IsActive && this.FirstSunDayInMonth.Open > now.TimeOfDay && !this.FirstSunDayInMonth.ClosedThisDay)
+                    return string.Format(resultFormat, this.FirstSunDayInMonth.Open);
 
-                if (now.Date == lastSundayInMonth.Date && LastSundayInMonth.IsActive && LastSundayInMonth.Open > now.TimeOfDay && !LastSundayInMonth.ClosedThisDay)
-                    return string.Format(resultFormat, LastSundayInMonth.Open);
+                if (now.Date == lastSundayInMonth.Date && this.LastSundayInMonth.IsActive && this.LastSundayInMonth.Open > now.TimeOfDay && !this.LastSundayInMonth.ClosedThisDay)
+                    return string.Format(resultFormat, this.LastSundayInMonth.Open);
             }
 
             // Normal week days
-            WeekDay weekDay = WeekDays.FirstOrDefault(x => x.DayOfWeek == now.DayOfWeek.ToString());
+            WeekDay weekDay = this.WeekDays.FirstOrDefault(x => x.DayOfWeek == now.DayOfWeek.ToString());
 
             if (weekDay != null)
             {
@@ -315,7 +315,7 @@ namespace OpeningHours.Umbraco.Source.Model
         /// </summary>
         public bool IsOpen
         {
-            get { return !string.IsNullOrEmpty(GetTodaysOpeningHours()); }
+            get { return !string.IsNullOrEmpty(this.GetTodaysOpeningHours()); }
         }
     }
 }

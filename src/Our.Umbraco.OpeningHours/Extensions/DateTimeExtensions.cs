@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpeningHours.Umbraco.Source.Extensions
+namespace Our.Umbraco.OpeningHours.Extensions
 {
     public static class DateTimeExtensions
     {

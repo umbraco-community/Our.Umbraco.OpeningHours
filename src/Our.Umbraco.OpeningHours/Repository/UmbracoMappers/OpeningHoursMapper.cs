@@ -1,11 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OpeningHours.Umbraco.Source.Model;
+using Our.Umbraco.OpeningHours.Model;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace OpeningHours.Umbraco.Source.Repository.UmbracoMappers
+namespace Our.Umbraco.OpeningHours.Repository.UmbracoMappers
 {
     public static class OpeningHoursMapper
     {
@@ -15,20 +15,20 @@ namespace OpeningHours.Umbraco.Source.Repository.UmbracoMappers
         /// <param name="content">IPublishedContent</param>
         /// <param name="openingHoursPropertyAlias">string</param>
         /// <returns>OpeningHours. Returns null if property JSON couldn't be deserialized.</returns>        
-        public static Model.OpeningHours MapOpeningHours(IPublishedContent content, string openingHoursPropertyAlias)
+        public static Our.Umbraco.OpeningHours.Model.OpeningHours MapOpeningHours(IPublishedContent content, string openingHoursPropertyAlias)
         {
             // TODO: needs to be refactored so we're able to simply do: myContent.GetPropertyValue<OpeningHours>("openingHoursPropertyAlias")
 
             // Check if this node has a property with the given alias and if it has a value
             if (!content.HasProperty(openingHoursPropertyAlias) || !content.HasValue(openingHoursPropertyAlias))
-                return new Model.OpeningHours();
+                return new Our.Umbraco.OpeningHours.Model.OpeningHours();
 
             try
             {
                 // Get opening hours as dynamic object
                 dynamic json = JsonConvert.DeserializeObject(content.GetPropertyValue<string>(openingHoursPropertyAlias));
 
-                var openingHours = new Model.OpeningHours();
+                var openingHours = new Our.Umbraco.OpeningHours.Model.OpeningHours();
 
                 // Week days
                 if (json.weekDays != null)
