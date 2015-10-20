@@ -1,6 +1,5 @@
 ﻿(function () {
 	angular.module("umbraco").controller("openingHours.controller", function ($scope, assetsService) {
-		assetsService.loadCss("/App_Plugins/OpeningHours/openingHours.css");
 
 		// re-use the date time picker config
 		var dateTimePickerConfig = { pickDate: false, pickTime: true, pick12HourFormat: false, time24h: true, format: "HH:mm" };

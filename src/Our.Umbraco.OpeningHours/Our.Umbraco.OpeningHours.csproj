@@ -85,12 +85,12 @@
     <Compile Include="Repository\UmbracoMappers\OpeningHoursMapper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PropertyEditor\openingHours.controller.js" />
-    <Content Include="PropertyEditor\openingHours.css" />
-    <Content Include="PropertyEditor\openingHours.html" />
+    <Content Include="Web\UI\App_Plugins\OpeningHours\js\openingHours.controllers.js" />
+    <Content Include="Web\UI\App_Plugins\OpeningHours\css\openingHours.css" />
+    <Content Include="Web\UI\App_Plugins\OpeningHours\views\openingHours.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PropertyEditor\package.manifest" />
+    <Content Include="Web\UI\App_Plugins\OpeningHours\package.manifest" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

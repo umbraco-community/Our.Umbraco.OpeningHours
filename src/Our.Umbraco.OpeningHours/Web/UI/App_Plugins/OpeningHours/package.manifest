@@ -4,14 +4,16 @@
             alias: "OpeningHours",            
             name: "Opening hours",            
             editor: {
-                view: "~/App_Plugins/OpeningHours/openingHours.html",
+                view: "~/App_Plugins/OpeningHours/views/openingHours.html",
 				hideLabel: true,
 				valueType: "JSON"
             }
         }
-    ]
-    ,    
+    ],    
     javascript: [
-        '~/App_Plugins/OpeningHours/openingHours.controller.js'		
-    ]
+        '~/App_Plugins/OpeningHours/js/openingHours.controllers.js'		
+    ],
+	css: [
+		'~/App_Plugins/OpeningHours/css/openingHours.css'
+	]
 }

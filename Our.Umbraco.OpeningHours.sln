@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpeningHours.Umbraco.Source", "OpeningHours.Umbraco.Source\OpeningHours.Umbraco.Source.csproj", "{C435203A-343B-4B6D-8861-F410F1B8456C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.OpeningHours", "src\Our.Umbraco.OpeningHours\Our.Umbraco.OpeningHours.csproj", "{C435203A-343B-4B6D-8861-F410F1B8456C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
