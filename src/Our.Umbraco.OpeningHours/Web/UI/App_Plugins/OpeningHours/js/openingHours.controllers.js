@@ -1,69 +1,173 @@
 ﻿(function () {
-	angular.module("umbraco").controller("openingHours.controller", function ($scope, assetsService) {
+	angular.module("umbraco").controller("openingHours.controllers.OpeningHoursController", function ($scope) {
 
-		// re-use the date time picker config
-		var dateTimePickerConfig = { pickDate: false, pickTime: true, pick12HourFormat: false, time24h: true, format: "HH:mm" };
+	    var datePickerConfig = { pickDate: true, pickTime: false, pick12HourFormat: false, format: "YYYY-MM-DD" };
 
-		if ($scope.model.value === "") {
-			// Set up the model
-			$scope.model.value = {
-				weekDays: [],
-				lastSundayInMonth: {
-					isActive: false,
-					open: {},
-					closed: {}
-				},
-				firstSundayInMonth: {
-					isActive: false,
-					open: {},
-					closed: {}
-				},
-				specificDays: []
-			};
+	    var weekdayConfig = { label: "", day: 0, opens: "09:00", closes: "17:00", isOpen: true };
+	    var holidayConfig = { label: "", date: { view: 'datepicker', config: datePickerConfig, value: new Date() }, opens: "09:00", closes: "17:00", isOpen: true };
 
-		    
+	    var weekDays = [
+            { id: 1, name: "Monday" },
+            { id: 2, name: "Tuesday" },
+            { id: 3, name: "Wednesday" },
+            { id: 4, name: "Thursday" },
+            { id: 5, name: "Friday" },
+            { id: 6, name: "Saturday" },
+            { id: 0, name: "Sunday" }
+	    ];
 
-			// Add week days
-			// TODO: Need to find a way to not store the entire Umbraco datetime picker objects in the cache since 1) it's not needed and 2) it's ugly as h... ;-)		
-		    $scope.model.value.weekDays.push({ dayOfWeek: "Monday", label: "Monday", open: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closed: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closedThisDay: false });
-		    $scope.model.value.weekDays.push({ dayOfWeek: "Tuesday", label: "Tuesday", open: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closed: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closedThisDay: false });
-		    $scope.model.value.weekDays.push({ dayOfWeek: "Wednesday", label: "Wednesday", open: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closed: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closedThisDay: false });
-		    $scope.model.value.weekDays.push({ dayOfWeek: "Thursday", label: "Thursday", open: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closed: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closedThisDay: false });
-		    $scope.model.value.weekDays.push({ dayOfWeek: "Friday", label: "Friday", open: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closed: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closedThisDay: false });
-		    $scope.model.value.weekDays.push({ dayOfWeek: "Saturday", label: "Saturday", open: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closed: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closedThisDay: false });
-		    $scope.model.value.weekDays.push({ dayOfWeek: "Sunday", label: "Sunday", open: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closed: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() }, closedThisDay: false });
-
-			$scope.model.value.lastSundayInMonth.open = { view: 'datepicker', config: dateTimePickerConfig, value: new Date() };
-			$scope.model.value.lastSundayInMonth.closed = { view: 'datepicker', config: dateTimePickerConfig, value: new Date() };
-
-			$scope.model.value.firstSundayInMonth.open = { view: 'datepicker', config: dateTimePickerConfig, value: new Date() };
-			$scope.model.value.firstSundayInMonth.closed = { view: 'datepicker', config: dateTimePickerConfig, value: new Date() };
-		}
-
-		$scope.createNewOpeningDay = function () {
-			var openingDay = {
-				text: "",
-				selectedDate: {
-					view: 'datepicker',
-					config: {
-						pickDate: true,
-						pickTime: false,
-						pick12HourFormat: false,
-						format: "YYYY-MM-DD"
-					},
-					value: new Date()
-				},
-				open: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() },
-				closed: { view: 'datepicker', config: dateTimePickerConfig, value: new Date() },
-				closedThisDay: false
-			};
-
-			$scope.model.value.specificDays.push(openingDay);
+		$scope.createHolidayDay = function () {
+		    var openingDay = angular.copy(holidayConfig);
+		    $scope.model.data.holidays.push(openingDay);
 		};
 
-		$scope.deleteOpeningDay = function (day) {
-			var index = $scope.model.value.specificDays.indexOf(day);
-			$scope.model.value.specificDays.splice(index, 1);
+		$scope.deleteHolidayDay = function (day) {
+		    var index = $scope.model.data.holidays.indexOf(day);
+			$scope.model.data.holidays.splice(index, 1);
 		};
+
+	    var initData = function () {
+
+	        $scope.model.data = {
+	            weekdays: [],
+	            holidays: []
+	        };
+
+	        if ($scope.model.value === "") {
+
+	            // Populate default model
+	            angular.forEach(weekDays, function (val, key) {
+	                var model = angular.copy(weekdayConfig);
+
+	                model.day = val.id;
+	                model.label = val.name;
+
+	                $scope.model.data.weekdays.push(model);
+	            });
+
+	        } else {
+
+	            // Populate model from stored value
+	            angular.forEach(weekDays, function (val, key) {
+	                var model = angular.copy(weekdayConfig);
+
+	                model.day = val.id;
+	                model.label = val.name;
+
+	                model.opens = $scope.model.value.weekdays[model.day].opens;
+	                model.closes = $scope.model.value.weekdays[model.day].closes;
+	                model.isOpen = $scope.model.value.weekdays[model.day].isOpen;
+
+	                $scope.model.data.weekdays.push(model);
+	            });
+
+	            if ("holidays" in $scope.model.value) {
+	                angular.forEach($scope.model.value.holidays, function(val, key) {
+	                    var model = angular.copy(holidayConfig);
+
+	                    model.label = val.label;
+
+	                    model.date.value = val.date;
+	                    model.opens = val.opens;
+	                    model.closes = val.closes;
+	                    model.isOpen = val.isOpen;
+
+	                    $scope.model.data.holidays.push(model);
+	                });
+	            }
+
+	        }
+	    }
+
+        var storeData = function() {
+            
+            var data = {
+                weekdays: {},
+                holidays: []
+            };
+
+            angular.forEach($scope.model.data.weekdays, function (val, key) {
+                data.weekdays[val.day] = {
+                    opens: val.opens,
+                    closes: val.closes, 
+                    isOpen: val.isOpen
+                };
+            });
+
+            angular.forEach($scope.model.data.holidays, function (val, key) {
+                data.holidays.push({
+                    label: val.label,
+                    date: val.date.value,
+                    opens: val.opens,
+                    closes: val.closes,  
+                    isOpen: val.isOpen
+                });
+            });
+
+            $scope.model.value = data;
+        }
+
+        initData();
+
+        $scope.activeSubmitWatcher = 0;  
+        $scope.submitWatcherOnLoad = function () {
+            return ++$scope.activeSubmitWatcher; 
+        }  
+        $scope.submitWatcherOnSubmit = function () {  
+            storeData();
+        }
+
 	});
+
+    angular.module("umbraco.directives")
+        .directive('ohTimePicker', function () {
+            return {
+                scope: {
+                    model: "="
+                },
+                restrict: 'E',
+                replace: true,
+                templateUrl: '/app_plugins/openinghours/views/openingHours.timePicker.html',
+                link: function (scope, element, attrs, ctrl) {
+
+                    scope.times = [];
+
+                    for (var h2 = 0; h2 < 24; h2++) {
+                        for (var m2 = 0; m2 < 12; m2++) {
+                            var t = ("0" + h2).slice(-2) + ":" + ("0" + (m2*5)).slice(-2);
+                            scope.times.push(t);
+                        }
+                    }
+
+                }
+            };
+        });
+
+    angular.module("umbraco.directives")
+        .directive('ohSubmitWatcher', function ($rootScope) {
+        var link = function (scope, element, attrs, ngModelCtrl) {
+            // call the load callback on scope to obtain the ID of this submit watcher
+            var id = scope.loadCallback();
+            var unSubscribe = scope.$on("formSubmitting", function (ev, args) {
+                // on the "formSubmitting" event, call the submit callback on scope to notify the controller to do it's magic
+                if (id === scope.activeSubmitWatcher) {
+                    scope.submitCallback();
+                }
+            });
+        }
+
+        return {
+            restrict: "E",
+            replace: true,
+            template: "",
+            scope: {
+                loadCallback: '=',
+                submitCallback: '=',
+                activeSubmitWatcher: '='
+            },
+            link: link
+        }
+    });
+
 }());
+

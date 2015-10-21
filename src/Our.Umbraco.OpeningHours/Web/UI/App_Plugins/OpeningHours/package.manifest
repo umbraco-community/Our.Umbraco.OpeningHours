@@ -5,7 +5,6 @@
             name: "Opening hours",            
             editor: {
                 view: "~/App_Plugins/OpeningHours/views/openingHours.html",
-				hideLabel: true,
 				valueType: "JSON"
             }
         }

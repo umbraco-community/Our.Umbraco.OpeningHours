@@ -2,10 +2,6 @@
 .panel {
     margin-bottom: 20px;
     background-color: #fff;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 
 .panel-heading {
@@ -22,20 +18,50 @@
 
 .panel-default>.panel-heading {
     color: #333;
-    background-color: #f5f5f5;
+    background-color: #f8f8f8;
     border-color: #ddd;
 }
 
 .panel-body {
-    padding: 15px;
+    padding: 10px 0;
 }
 
 .datepicker-wrapper {
     margin-top: 5px;
 }
 
-.week-days-table tr .open-col {
-    width: 25%;
+.m0 {
+    margin-bottom: 0;
+}
+
+.time-col,
+.date-col,
+.delete-col,
+.checkbox-col {
+    width: 1%;
+}
+
+.time-col .datepickerinput  {
+    width: 45px;
+}
+
+.date-col .datepickerinput  {
+    width: 80px;
+}
+
+.time-col .umb-datepicker p,
+.date-col .umb-datepicker p {
+    display: none !important;
+}
+
+.text-col .umb-textstring {
+    width: 100%;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+.delete-col a {
+    cursor: pointer;
 }
 
 .week-days-table tr td {
@@ -43,10 +69,10 @@
     vertical-align: middle !important;
 }
 
-.week-days-table tr td .shop-closed-overlay {
-     background: rgb(25, 25, 25); /* Fall-back for browsers that don't
+.week-days-table .closed-overlay {
+     background: rgb(255, 255, 255); /* Fall-back for browsers that don't
                                     support rgba */
-    background: rgba(25, 25, 25, .2);
+    background: rgba(255, 255, 255, .8);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -63,8 +89,7 @@
     float: left;
 }
 
-.week-days-table tr .week-day-text {
-    font-weight: bolder;    
+.week-days-table tr .week-day-text {  
     vertical-align: middle;
 }
 
@@ -106,4 +131,15 @@
 .timepicker-table tr td input {
     width: 70%;
     padding: 0px 6px;
+}
+
+.time-picker {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.time-picker select {
+    width: 80px;
+    display: inline-block;
+    vertical-align: middle;
 }
