@@ -9,6 +9,8 @@ namespace Our.Umbraco.OpeningHours.Extensions
         public static Timeframe TodaysOpeningHours(this Model.OpeningHours model,
             DateTime? today = null)
         {
+            if (model == null) return null;
+
             if (!today.HasValue)
             {
                 today = DateTime.UtcNow;
@@ -22,12 +24,16 @@ namespace Our.Umbraco.OpeningHours.Extensions
             }
 
             // No holidays, so check general weekday opening hours
-            return model.Weekdays[today.Value.DayOfWeek];
+            return model.Weekdays.ContainsKey(today.Value.DayOfWeek) 
+                ? model.Weekdays[today.Value.DayOfWeek]
+                : null;
         }
 
         public static int ClosesInHowManyMinutes(this Model.OpeningHours model, 
             DateTime? now = null)
         {
+            if (model == null) return -1; // Default to store closed
+
             if (!now.HasValue)
             {
                 now = DateTime.UtcNow;
@@ -35,9 +41,9 @@ namespace Our.Umbraco.OpeningHours.Extensions
 
             // Check to see if store is open today at all
             var todaysOpeningHours = model.TodaysOpeningHours(now);
-            if (!todaysOpeningHours.IsOpen)
+            if (todaysOpeningHours == null || !todaysOpeningHours.IsOpen)
             {
-                return -1; // store closed
+                return -1; // store closed 
             }
 
             // Check to see if store has opened yet
