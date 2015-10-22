@@ -13,7 +13,7 @@ namespace Our.Umbraco.OpeningHours.Extensions
 
             if (!today.HasValue)
             {
-                today = DateTime.UtcNow;
+                today = DateTime.Now;
             }
 
             // Find any holidays with todays date
@@ -36,7 +36,7 @@ namespace Our.Umbraco.OpeningHours.Extensions
 
             if (!now.HasValue)
             {
-                now = DateTime.UtcNow;
+                now = DateTime.Now;
             }
 
             // Check to see if store is open today at all
