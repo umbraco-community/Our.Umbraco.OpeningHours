@@ -7,15 +7,21 @@ namespace Our.Umbraco.OpeningHours.Model
     public class OpeningHours
     {
         [JsonProperty("weekdays")]
-        public Dictionary<DayOfWeek, Timeframe> Weekdays { get; set; }
+        public Dictionary<DayOfWeek, WeekdayOpeningHours> Weekdays { get; set; }
 
         [JsonProperty("holidays")]
-        public List<Holiday> Holidays { get; set; }
+        public List<HolidayOpeningHours> Holidays { get; set; }
 
         public OpeningHours()
         {
-            this.Weekdays = new Dictionary<DayOfWeek, Timeframe>();
-            this.Holidays = new List<Holiday>();
+            this.Weekdays = new Dictionary<DayOfWeek, WeekdayOpeningHours>();
+
+            for (var i = 0; i < 7; i++)
+            {
+                this.Weekdays.Add((DayOfWeek)i, new WeekdayOpeningHours());
+            }
+
+            this.Holidays = new List<HolidayOpeningHours>();
         }
     }
 }

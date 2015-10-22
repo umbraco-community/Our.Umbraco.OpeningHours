@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Our.Umbraco.OpeningHours.Model
 {
-    public class Holiday : Timeframe
+    public class HolidayOpeningHours : WeekdayOpeningHours
     {
         [JsonProperty("date")]
         public DateTime Date { get; set; }

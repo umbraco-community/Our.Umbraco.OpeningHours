@@ -1,0 +1,37 @@
+﻿<div ng-controller="openingHours.controllers.WeekdayOpeningHoursController">
+    <div class="panel panel-default">
+        <div>
+            <table class="table table-condensed week-days-table m0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Day</th>
+                        <th>Opens</th>
+                        <th>Closes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="workday in model.data.weekdays">
+                        <td class="checkbox-col">
+                            <input type="checkbox" ng-model="workday.isOpen" />
+                        </td>
+                        <td class="week-day-text">
+                            {{ workday.label }}
+                        </td>
+                        <td class="time-col">
+                            <div class="closed-overlay" ng-hide="workday.isOpen"></div>
+                            <!--<umb-editor model="workday.opens"></umb-editor>-->
+                            <oh-time-picker model="workday.opens"></oh-time-picker>
+                        </td>
+                        <td class="time-col">
+                            <div class="closed-overlay" ng-hide="workday.isOpen"></div>
+                            <!--<umb-editor model="workday.closes"></umb-editor>-->
+                            <oh-time-picker model="workday.closes"></oh-time-picker>
+                            <oh-submit-watcher active-submit-watcher="$parent.activeSubmitWatcher" load-callback="$parent.submitWatcherOnLoad" submit-callback="$parent.submitWatcherOnSubmit"></oh-submit-watcher>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

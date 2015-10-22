@@ -214,17 +214,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\HolidayOpeningHoursValueConverter.cs" />
+    <Compile Include="Converters\WeekdayOpeningHoursValueConverter.cs" />
     <Compile Include="Converters\OpeningHoursValueConverter.cs" />
     <Compile Include="Extensions\OpeningHoursExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Model\OpeningHours.cs" />
-    <Compile Include="Model\Holiday.cs" />
-    <Compile Include="Model\Timeframe.cs" />
+    <Compile Include="Model\HolidayOpeningHours.cs" />
+    <Compile Include="Model\WeekdayOpeningHours.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web\UI\App_Plugins\OpeningHours\js\openingHours.controllers.js" />
     <Content Include="Web\UI\App_Plugins\OpeningHours\css\openingHours.css" />
+    <Content Include="Web\UI\App_Plugins\OpeningHours\views\openingHours.holiday.html" />
+    <Content Include="Web\UI\App_Plugins\OpeningHours\views\openingHours.weekday.html" />
     <Content Include="Web\UI\App_Plugins\OpeningHours\views\openingHours.timePicker.html" />
     <Content Include="Web\UI\App_Plugins\OpeningHours\views\openingHours.html" />
   </ItemGroup>

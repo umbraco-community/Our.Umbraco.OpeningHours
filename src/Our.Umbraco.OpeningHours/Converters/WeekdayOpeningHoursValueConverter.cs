@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Our.Umbraco.OpeningHours.Model;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
@@ -9,11 +10,11 @@ using Umbraco.Core.PropertyEditors;
 namespace Our.Umbraco.OpeningHours.Converters
 {
     [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
-    public class OpeningHoursValueConverter : PropertyValueConverterBase
+    public class WeekdayOpeningHoursValueConverter : PropertyValueConverterBase
     {
         public override bool IsConverter(PublishedPropertyType propertyType)
         {
-            return propertyType.PropertyEditorAlias.InvariantEquals("OpeningHours");
+            return propertyType.PropertyEditorAlias.InvariantEquals("WeekdayOpeningHours");
         }
 
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
@@ -22,7 +23,7 @@ namespace Our.Umbraco.OpeningHours.Converters
             {
                 if (source != null && !source.ToString().IsNullOrWhiteSpace())
                 {
-                    var oh = JsonConvert.DeserializeObject<Model.OpeningHours>(source.ToString());
+                    var oh = JsonConvert.DeserializeObject<Dictionary<DayOfWeek, WeekdayOpeningHours>>(source.ToString());
                     return oh;
                 }
             }
@@ -32,7 +33,14 @@ namespace Our.Umbraco.OpeningHours.Converters
             }
 
             // Create default model
-            return new Model.OpeningHours();
+            var dict = new Dictionary<DayOfWeek, WeekdayOpeningHours>();
+
+            for (var i = 0; i < 7; i++)
+            {
+                dict.Add((DayOfWeek)i, new WeekdayOpeningHours());
+            }
+
+            return dict;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Our.Umbraco.OpeningHours.Extensions
 {
     public static class OpeningHoursExtensions
     {
-        public static Timeframe TodaysOpeningHours(this Model.OpeningHours model,
+        public static WeekdayOpeningHours TodaysOpeningHours(this Model.OpeningHours model,
             DateTime? today = null)
         {
             if (model == null) return null;

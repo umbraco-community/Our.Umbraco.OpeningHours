@@ -2,9 +2,25 @@
     propertyEditors: [      
         {            
             alias: "OpeningHours",            
-            name: "Opening hours",            
+            name: "Opening Hours",            
             editor: {
                 view: "~/App_Plugins/OpeningHours/views/openingHours.html",
+				valueType: "JSON"
+            }
+        },
+		{            
+            alias: "WeekdayOpeningHours",            
+            name: "Weekday Opening Hours",            
+            editor: {
+                view: "~/App_Plugins/OpeningHours/views/openingHours.weekday.html",
+				valueType: "JSON"
+            }
+        },
+		{            
+            alias: "HolidayOpeningHours",            
+            name: "Holiday Opening Hours",            
+            editor: {
+                view: "~/App_Plugins/OpeningHours/views/openingHours.holiday.html",
 				valueType: "JSON"
             }
         }

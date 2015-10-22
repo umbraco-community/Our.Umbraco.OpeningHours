@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Our.Umbraco.OpeningHours.Model
 {
-    public class Timeframe
+    public class WeekdayOpeningHours
     {
         [JsonProperty("opens")]
         public TimeSpan Opens { get; set; }
