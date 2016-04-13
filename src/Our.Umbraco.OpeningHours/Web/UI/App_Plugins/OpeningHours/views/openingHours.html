@@ -48,7 +48,7 @@
                 <tr>
                     <th></th>
                     <th>Text</th>
-                    <th ng-if="requireDates">Date</th>
+                    <th ng-if="requireHolidayDates">Date</th>
                     <th>Opens</th>
                     <th>Closes</th>
                     <th></th>
@@ -62,7 +62,7 @@
                     <td class="text-col">
                         <input type="text" ng-model="holiday.label" placeholder="I.e. 'Christmas Day'" class="umb-editor umb-textstring"/>
                     </td>
-                    <td class="date-col" ng-if="requireDates">
+                    <td class="date-col" ng-if="requireHolidayDates">
                         <umb-editor model="holiday.date"></umb-editor>
                     </td>
                     <td class="time-col">

@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -273,11 +274,11 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>IF NOT "$(SolutionDir)" == "*Undefined*" (
-xcopy /s /y "$(TargetPath)" "C:\Users\Matt\Work\TheOutfield\WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website\bin"
-xcopy /s /y "$(TargetDir)$(ProjectName).pdb" "C:\Users\Matt\Work\TheOutfield\WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website\bin"
-xcopy /s /y "$(ProjectDir)Web\UI\*.*" "C:\Users\Matt\Work\TheOutfield\WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website"
-)</PostBuildEvent>
+    <PostBuildEvent>REM IF NOT "$(SolutionDir)" == "*Undefined*" (
+REM xcopy /s /y "$(TargetPath)" "C:\Users\Matt\Work\TheOutfield\WelcomeToYorkshireREM \Website\Src\WelcomeToYorkshire.Website\bin"
+REM xcopy /s /y "$(TargetDir)$(ProjectName).pdb" "C:\Users\Matt\Work\TheOutfieldREM \WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website\bin"
+REM xcopy /s /y "$(ProjectDir)Web\UI\*.*" "C:\Users\Matt\Work\TheOutfieldREM \WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website"
+REM )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
