@@ -7,13 +7,13 @@
                 <tr>
                     <th></th>
                     <th>Text</th>
-                    <th>Date</th>
+                    <th ng-if="requireHolidayDates">Date</th>
                     <th>Opens</th>
                     <th>Closes</th>
                     <th></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                 <tr ng-repeat="holiday in model.data.holidays">
                     <td class="checkbox-col">
                         <input type="checkbox" ng-model="holiday.isOpen"/>
@@ -21,7 +21,7 @@
                     <td class="text-col">
                         <input type="text" ng-model="holiday.label" placeholder="I.e. 'Christmas Day'" class="umb-editor umb-textstring"/>
                     </td>
-                    <td class="date-col">
+                    <td class="date-col" ng-if="requireHolidayDates">
                         <umb-editor model="holiday.date"></umb-editor>
                     </td>
                     <td class="time-col">

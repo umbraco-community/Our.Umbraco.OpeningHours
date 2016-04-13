@@ -17,16 +17,29 @@ namespace Our.Umbraco.OpeningHours.Extensions
             }
 
             // Find any holidays with todays date
-            var holiday = model.Holidays.FirstOrDefault(x => x.Date.Date == today.Value.Date);
-            if (holiday != null)
+            if (model.Holidays != null)
             {
-                return holiday;
+                var holiday = model.Holidays.FirstOrDefault(x => x.Date.HasValue 
+                    && x.Date.Value.Date == today.Value.Date);
+                if (holiday != null)
+                {
+                    return holiday;
+                }
             }
 
             // No holidays, so check general weekday opening hours
-            return model.Weekdays.ContainsKey(today.Value.DayOfWeek) 
+            return model.Weekdays != null && model.Weekdays.ContainsKey(today.Value.DayOfWeek) 
                 ? model.Weekdays[today.Value.DayOfWeek]
                 : null;
+        }
+
+        public static bool IsOpen24Hours(this WeekdayOpeningHours model)
+        {
+            if (model == null) return false;
+            if (!model.IsOpen) return false;
+
+            var midnight = new TimeSpan(0,0,0);
+            return model.Opens == midnight && model.Closes == midnight;
         }
 
         public static int ClosesInHowManyMinutes(this Model.OpeningHours model, 
@@ -46,6 +59,12 @@ namespace Our.Umbraco.OpeningHours.Extensions
                 return -1; // store closed 
             }
 
+            // Check to see if store is 24 hour
+            if (todaysOpeningHours.IsOpen24Hours())
+            {
+                return 1440; // 24 hours
+            }
+
             // Check to see if store has opened yet
             var timeOfDay = now.Value.TimeOfDay;
             if (timeOfDay < todaysOpeningHours.Opens)
@@ -54,7 +73,11 @@ namespace Our.Umbraco.OpeningHours.Extensions
             }
 
             // Check to see when store closes
-            var closesIn = (int)(todaysOpeningHours.Closes - timeOfDay).TotalMinutes;
+            var midnight = new TimeSpan(0, 0, 0);
+            var closingTime = todaysOpeningHours.Closes;
+            if(closingTime == midnight) closingTime = new TimeSpan(23,59,59);
+
+            var closesIn = (int)(closingTime - timeOfDay).TotalMinutes;
             return closesIn > 0 ? closesIn : -3;
         }
     }

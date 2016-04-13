@@ -23,5 +23,13 @@ namespace Our.Umbraco.OpeningHours.Model
 
             this.Holidays = new List<HolidayOpeningHours>();
         }
+
+        public OpeningHours(Dictionary<DayOfWeek, WeekdayOpeningHours> weekdays,
+            List<HolidayOpeningHours> holidays)
+            : this()
+        {
+            if (weekdays != null) Weekdays = weekdays;
+            if (holidays != null) Holidays = holidays;
+        }
     }
 }

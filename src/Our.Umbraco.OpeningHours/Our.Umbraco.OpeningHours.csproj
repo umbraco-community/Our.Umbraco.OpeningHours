@@ -274,9 +274,9 @@
   </ProjectExtensions>
   <PropertyGroup>
     <PostBuildEvent>IF NOT "$(SolutionDir)" == "*Undefined*" (
-xcopy /s /y "$(TargetPath)" "C:\Users\Matt\Work\TheOutfield\CommonGood\Spar\Website\Src\Spar.Website\bin"
-xcopy /s /y "$(TargetDir)$(ProjectName).pdb" "C:\Users\Matt\Work\TheOutfield\CommonGood\Spar\Website\Src\Spar.Website\bin"
-xcopy /s /y "$(ProjectDir)Web\UI\*.*" "C:\Users\Matt\Work\TheOutfield\CommonGood\Spar\Website\Src\Spar.Website"
+xcopy /s /y "$(TargetPath)" "C:\Users\Matt\Work\TheOutfield\WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website\bin"
+xcopy /s /y "$(TargetDir)$(ProjectName).pdb" "C:\Users\Matt\Work\TheOutfield\WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website\bin"
+xcopy /s /y "$(ProjectDir)Web\UI\*.*" "C:\Users\Matt\Work\TheOutfield\WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website"
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

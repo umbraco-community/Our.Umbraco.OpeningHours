@@ -6,7 +6,17 @@
             editor: {
                 view: "~/App_Plugins/OpeningHours/views/openingHours.html",
 				valueType: "JSON"
-            }
+            },
+			prevalues: {
+				fields: [
+					{
+						label: "Require Holiday Dates",
+						description: "Select whether holiday opening hours should be for specific dates",
+						key: "requireHolidayDates",
+						view: "boolean"
+					}
+				]
+			}
         },
 		{            
             alias: "WeekdayOpeningHours",            
@@ -22,7 +32,17 @@
             editor: {
                 view: "~/App_Plugins/OpeningHours/views/openingHours.holiday.html",
 				valueType: "JSON"
-            }
+            },
+			prevalues: {
+				fields: [
+					{
+						label: "Require Holiday Dates",
+						description: "Select whether holiday opening hours should be for specific dates",
+						key: "requireHolidayDates",
+						view: "boolean"
+					}
+				]
+			}
         }
     ],    
     javascript: [

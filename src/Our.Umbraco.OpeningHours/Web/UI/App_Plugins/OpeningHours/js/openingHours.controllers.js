@@ -1,10 +1,16 @@
 ﻿(function () {
 	angular.module("umbraco").controller("openingHours.controllers.OpeningHoursController", function ($scope) {
 
+	    $scope.requireHolidayDates = $scope.model.config.requireHolidayDates;
+
+	    var defaultHolidayDate = $scope.requireHolidayDates
+	        ? new Date()
+	        : null;
+
 	    var datePickerConfig = { pickDate: true, pickTime: false, pick12HourFormat: false, format: "YYYY-MM-DD" };
 
 	    var weekdayConfig = { label: "", day: 0, opens: "09:00", closes: "17:00", isOpen: true };
-	    var holidayConfig = { label: "", date: { view: 'datepicker', config: datePickerConfig, value: new Date() }, opens: "09:00", closes: "17:00", isOpen: true };
+	    var holidayConfig = { label: "", date: { view: 'datepicker', config: datePickerConfig, value: defaultHolidayDate }, opens: "09:00", closes: "17:00", isOpen: true };
 
 	    var weekDays = [
             { id: 1, name: "Monday" },
@@ -199,8 +205,14 @@
 
 	angular.module("umbraco").controller("openingHours.controllers.HolidayOpeningHoursController", function ($scope) {
 
+	    $scope.requireHolidayDates = $scope.model.config.requireHolidayDates;
+
+	    var defaultHolidayDate = $scope.requireHolidayDates
+	        ? new Date()
+	        : null;
+
 	    var datePickerConfig = { pickDate: true, pickTime: false, pick12HourFormat: false, format: "YYYY-MM-DD" };
-	    var holidayConfig = { label: "", date: { view: 'datepicker', config: datePickerConfig, value: new Date() }, opens: "09:00", closes: "17:00", isOpen: true };
+	    var holidayConfig = { label: "", date: { view: 'datepicker', config: datePickerConfig, value: defaultHolidayDate }, opens: "09:00", closes: "17:00", isOpen: true };
 
 	    $scope.createHolidayDay = function () {
 	        var openingDay = angular.copy(holidayConfig);
