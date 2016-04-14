@@ -1,0 +1,145 @@
+﻿/* Styles blatantly stolen from latest version of Twitter Bootstrap since this version of Umbraco is running an older version of bootstrap */
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-weight: bold;
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #f8f8f8;
+    border-color: #ddd;
+}
+
+.panel-body {
+    padding: 10px 0;
+}
+
+.datepicker-wrapper {
+    margin-top: 5px;
+}
+
+.m0 {
+    margin-bottom: 0;
+}
+
+.time-col,
+.date-col,
+.delete-col,
+.checkbox-col {
+    width: 1%;
+}
+
+.time-col .datepickerinput  {
+    width: 45px;
+}
+
+.date-col .datepickerinput  {
+    width: 80px;
+}
+
+.time-col .umb-datepicker p,
+.date-col .umb-datepicker p {
+    display: none !important;
+}
+
+.text-col .umb-textstring {
+    width: 100%;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+.delete-col a {
+    cursor: pointer;
+}
+
+.week-days-table tr td {
+    position: relative;
+    vertical-align: middle !important;
+}
+
+.week-days-table .closed-overlay {
+     background: rgb(255, 255, 255); /* Fall-back for browsers that don't
+                                    support rgba */
+    background: rgba(255, 255, 255, .8);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+}
+
+.btn-add-opening-hours {
+    margin-bottom: 10px;
+}
+
+.week-days-table tr td .week-day-label, .week-days-table tr td table {
+    float: left;
+}
+
+.week-days-table tr .week-day-text {  
+    vertical-align: middle;
+}
+
+.week-days-table tr .week-day-text .checkbox-wrapper {
+    padding: 7px 0px;
+}
+
+.week-days-table tr .closed-this-day {
+    padding-left: 5px;
+}
+
+.week-days-table tr td .week-day-label {
+    font-weight: bold;
+    margin-right: 10px;
+    margin-top: 6px;
+}
+
+.timepicker-table tr td {
+    border: none;
+}
+
+.timepicker-table tr td a {
+    display: block;
+    text-decoration: none;
+}
+
+.timepicker-table tr td .btn {
+    padding: 0px;
+}
+
+.timepicker-table tr .time-spacing {
+    padding: 0px 5px;
+}
+
+.timepicker-table tr td a:hover {
+    text-decoration: none;
+}
+
+.timepicker-table tr td input {
+    width: 70%;
+    padding: 0px 6px;
+}
+
+.time-picker {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.time-picker select {
+    width: 80px;
+    display: inline-block;
+    vertical-align: middle;
+}

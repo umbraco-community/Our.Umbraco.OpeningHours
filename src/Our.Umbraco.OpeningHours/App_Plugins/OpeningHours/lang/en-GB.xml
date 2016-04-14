@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<language alias="en" intName="English (UK)" localName="English (UK)" lcid="" culture="en-GB">
+  <area alias="openingHours">
+
+    <key alias="weekdayTitle">Weekday opening hours</key>
+    <key alias="holidaysTitle">Holiday opening hours</key>
+
+    <key alias="addHoliday">Add holiday</key>
+
+    <key alias="day">Day</key>
+    <key alias="date">Date</key>
+    <key alias="text">Text</key>
+    <key alias="opens">Opens</key>
+    <key alias="closes">Closes</key>
+
+    <key alias="opens">Opens</key>
+    <key alias="closes">Closes</key>
+    <key alias="monday">Monday</key>
+    <key alias="tuesday">Tuesday</key>
+    <key alias="wednesday">Wednesday</key>
+    <key alias="thursday">Thursday</key>
+    <key alias="friday">Friday</key>
+    <key alias="saturday">Saturday</key>
+    <key alias="sunday">Sunday</key>
+  </area>
+</language>
