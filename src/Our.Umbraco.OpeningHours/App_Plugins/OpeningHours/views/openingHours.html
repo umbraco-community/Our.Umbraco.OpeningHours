@@ -1,16 +1,16 @@
 ﻿<div ng-controller="openingHours.controllers.OpeningHoursController">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Weekday opening hours
+            <localize key="openingHours_weekdayTitle">Weekday opening hours</localize>
         </div>
         <div class="panel-body">
             <table class="table table-condensed week-days-table m0">
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Day</th>
-                        <th>Opens</th>
-                        <th>Closes</th>
+                        <th><localize key="openingHours_day">Day</localize></th>
+                        <th><localize key="openingHours_opens">Opens</localize></th>
+                        <th><localize key="openingHours_closes">Closes</localize></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
                             <input type="checkbox" ng-model="workday.isOpen" />
                         </td>
                         <td class="week-day-text">
-                            {{ workday.label }}
+                            <localize key="{{workday.key}}">{{workday.label}}</localize>
                         </td>
                         <td class="time-col">
                             <div class="closed-overlay" ng-hide="workday.isOpen"></div>
@@ -40,53 +40,53 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Holiday opening hours
+            <localize key="openingHours_holidayTitle">Holiday opening hours</localize>
         </div>
         <div class="panel-body">
             <table class="table table-condensed week-days-table" ng-show="model.data.holidays.length > 0">
                 <thead>
-                <tr>
-                    <th></th>
-                    <th>Text</th>
-                    <th ng-if="requireHolidayDates">Date</th>
-                    <th>Opens</th>
-                    <th>Closes</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th></th>
+                        <th><localize key="openingHours_text">Text</localize></th>
+                        <th ng-if="requireHolidayDates"><localize key="openingHours_date">Date</localize></th>
+                        <th><localize key="openingHours_opens">Opens</localize></th>
+                        <th><localize key="openingHours_closes">Closes</localize></th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="holiday in model.data.holidays">
-                    <td class="checkbox-col">
-                        <input type="checkbox" ng-model="holiday.isOpen"/>
-                    </td>
-                    <td class="text-col">
-                        <input type="text" ng-model="holiday.label" placeholder="I.e. 'Christmas Day'" class="umb-editor umb-textstring"/>
-                    </td>
-                    <td class="date-col" ng-if="requireHolidayDates">
-                        <umb-editor model="holiday.date"></umb-editor>
-                    </td>
-                    <td class="time-col">
-                        <div class="closed-overlay" ng-hide="holiday.isOpen"></div>
-                        <oh-time-picker model="holiday.opens"></oh-time-picker>
-                    </td>
-                    <td class="time-col">
-                        <div class="closed-overlay" ng-hide="holiday.isOpen"></div> 
-                        <oh-time-picker model="holiday.closes"></oh-time-picker>
-                    </td>
-                    <td class="delete-col">
-                        <a ng-click="deleteHolidayDay(holiday);"><i class="icon icon-delete"></i></a>
-                        <oh-submit-watcher active-submit-watcher="$parent.activeSubmitWatcher" load-callback="$parent.submitWatcherOnLoad" submit-callback="$parent.submitWatcherOnSubmit"></oh-submit-watcher>
-                    </td>
-                </tr>
+                    <tr ng-repeat="holiday in model.data.holidays">
+                        <td class="checkbox-col">
+                            <input type="checkbox" ng-model="holiday.isOpen" />
+                        </td>
+                        <td class="text-col">
+                            <input type="text" ng-model="holiday.label" placeholder="I.e. 'Christmas Day'" class="umb-editor umb-textstring" />
+                        </td>
+                        <td class="date-col" ng-if="requireHolidayDates">
+                            <umb-editor model="holiday.date"></umb-editor>
+                        </td>
+                        <td class="time-col">
+                            <div class="closed-overlay" ng-hide="holiday.isOpen"></div>
+                            <oh-time-picker model="holiday.opens"></oh-time-picker>
+                        </td>
+                        <td class="time-col">
+                            <div class="closed-overlay" ng-hide="holiday.isOpen"></div>
+                            <oh-time-picker model="holiday.closes"></oh-time-picker>
+                        </td>
+                        <td class="delete-col">
+                            <a ng-click="deleteHolidayDay(holiday);"><i class="icon icon-delete"></i></a>
+                            <oh-submit-watcher active-submit-watcher="$parent.activeSubmitWatcher" load-callback="$parent.submitWatcherOnLoad" submit-callback="$parent.submitWatcherOnSubmit"></oh-submit-watcher>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
             <div class="usky-grid" style="text-align: center;">
                 <div ng-show="model.data.holidays.length == 0" style="padding: 10px 0;">
                     <div class="help-text">
-                        <localize key="grid_addElement"></localize>
+                        <localize key="openingHours_addHoliday"></localize>
                     </div>
-                </div> 
+                </div>
 
                 <a class="iconBox btn-add-opening-hours" ng-click="createHolidayDay();"><i class=" icon icon-add" title="Add" localize="title"></i></a>
             </div>

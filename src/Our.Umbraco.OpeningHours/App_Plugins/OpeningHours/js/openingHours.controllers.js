@@ -1,5 +1,5 @@
 ﻿(function () {
-	angular.module("umbraco").controller("openingHours.controllers.OpeningHoursController", function ($scope) {
+    angular.module("umbraco").controller("openingHours.controllers.OpeningHoursController", function ($scope, localizationService) {
 
 	    $scope.requireHolidayDates = $scope.model.config.requireHolidayDates;
 

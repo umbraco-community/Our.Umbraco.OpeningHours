@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<language alias="da" intName="Danish" localName="dansk" lcid="6" culture="da-DK">
+  <area alias="openingHours">
+
+    <key alias="weekdayTitle">Almindelige ugedage</key>
+    <key alias="holidayTitle">Ferie- og helligdage</key>
+    
+    <key alias="addHoliday">Tilføj helligdag</key>
+    
+    <key alias="day">Dag</key>
+    <key alias="date">Dato</key>
+    <key alias="text">Tekst</key>
+    <key alias="opens">Åbner</key>
+    <key alias="closes">Lukker</key>
+    
+    <key alias="opens">Åbner</key>
+    <key alias="closes">Lukker</key>
+    <key alias="monday">Mandag</key>
+    <key alias="tuesday">Tirsdag</key>
+    <key alias="wednesday">Onsdag</key>
+    <key alias="thursday">Torsdag</key>
+    <key alias="friday">Fredag</key>
+    <key alias="saturday">Lørdag</key>
+    <key alias="sunday">Søndag</key>
+  </area>
+</language>

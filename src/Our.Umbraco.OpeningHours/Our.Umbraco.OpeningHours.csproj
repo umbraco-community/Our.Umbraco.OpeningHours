@@ -228,6 +228,8 @@
   <ItemGroup>
     <Content Include="App_Plugins\OpeningHours\js\openingHours.controllers.js" />
     <Content Include="App_Plugins\OpeningHours\css\openingHours.css" />
+    <Content Include="App_Plugins\OpeningHours\lang\da-DK.xml" />
+    <Content Include="App_Plugins\OpeningHours\lang\en-GB.xml" />
     <Content Include="App_Plugins\OpeningHours\views\openingHours.holiday.html" />
     <Content Include="App_Plugins\OpeningHours\views\openingHours.weekday.html" />
     <Content Include="App_Plugins\OpeningHours\views\openingHours.timePicker.html" />
