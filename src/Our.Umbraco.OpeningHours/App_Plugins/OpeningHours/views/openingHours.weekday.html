@@ -5,9 +5,9 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Day</th>
-                        <th>Opens</th>
-                        <th>Closes</th>
+                        <th><localize key="openingHours_day">Day</localize></th>
+                        <th><localize key="openingHours_opens">Opens</localize></th>
+                        <th><localize key="openingHours_closes">Closes</localize></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -16,7 +16,7 @@
                             <input type="checkbox" ng-model="workday.isOpen" />
                         </td>
                         <td class="week-day-text">
-                            {{ workday.label }}
+                            <localize key="{{workday.key}}">{{workday.label}}</localize>
                         </td>
                         <td class="time-col">
                             <div class="closed-overlay" ng-hide="workday.isOpen"></div>

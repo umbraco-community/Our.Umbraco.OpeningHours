@@ -6,10 +6,10 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th>Text</th>
-                    <th ng-if="requireHolidayDates">Date</th>
-                    <th>Opens</th>
-                    <th>Closes</th>
+                    <th><localize key="openingHours_text">Text</localize></th>
+                    <th ng-if="requireHolidayDates"><localize key="openingHours_date">Date</localize></th>
+                    <th><localize key="openingHours_opens">Opens</localize></th>
+                    <th><localize key="openingHours_closes">Closes</localize></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -43,7 +43,7 @@
             <div class="usky-grid" style="text-align: center;">
                 <div ng-show="model.data.holidays.length == 0" style="padding: 10px 0;">
                     <div class="help-text">
-                        <localize key="grid_addElement"></localize>
+                        <localize key="openingHours_addHoliday"></localize>
                     </div>
                 </div> 
 

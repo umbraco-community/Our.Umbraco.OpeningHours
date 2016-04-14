@@ -13,13 +13,13 @@
 	    var holidayConfig = { label: "", date: { view: 'datepicker', config: datePickerConfig, value: defaultHolidayDate }, opens: "09:00", closes: "17:00", isOpen: true };
 
 	    var weekDays = [
-            { id: 1, name: "Monday" },
-            { id: 2, name: "Tuesday" },
-            { id: 3, name: "Wednesday" },
-            { id: 4, name: "Thursday" },
-            { id: 5, name: "Friday" },
-            { id: 6, name: "Saturday" },
-            { id: 0, name: "Sunday" }
+            { id: 1, name: 'Monday', alias: 'monday' },
+            { id: 2, name: "Tuesday", alias: 'tuesday' },
+            { id: 3, name: "Wednesday", alias: 'wednesday' },
+            { id: 4, name: "Thursday", alias: 'thursday' },
+            { id: 5, name: "Friday", alias: 'friday' },
+            { id: 6, name: "Saturday", alias: 'saturday' },
+            { id: 0, name: "Sunday", alias: 'sunday' }
 	    ];
 
 		$scope.createHolidayDay = function () {
@@ -59,6 +59,7 @@
 
 	                model.day = val.id;
 	                model.label = val.name;
+	                model.key = 'openingHours_' + val.alias;
 
 	                model.opens = $scope.model.value.weekdays[model.day].opens;
 	                model.closes = $scope.model.value.weekdays[model.day].closes;
@@ -130,13 +131,13 @@
 	    var weekdayConfig = { label: "", day: 0, opens: "09:00", closes: "17:00", isOpen: true };
 
 	    var weekDays = [
-            { id: 1, name: "Monday" },
-            { id: 2, name: "Tuesday" },
-            { id: 3, name: "Wednesday" },
-            { id: 4, name: "Thursday" },
-            { id: 5, name: "Friday" },
-            { id: 6, name: "Saturday" },
-            { id: 0, name: "Sunday" }
+            { id: 1, name: 'Monday', alias: 'monday' },
+            { id: 2, name: 'Tuesday', alias: 'tuesday' },
+            { id: 3, name: 'Wednesday', alias: 'wednesday' },
+            { id: 4, name: 'Thursday', alias: 'thursday' },
+            { id: 5, name: 'Friday', alias: 'friday' },
+            { id: 6, name: 'Saturday', alias: 'saturday' },
+            { id: 0, name: 'Sunday', alias: 'sunday' }
 	    ];
 
 	    var initData = function () {
@@ -153,6 +154,7 @@
 
 	                model.day = val.id;
 	                model.label = val.name;
+	                model.key = 'openingHours_' + val.alias;
 
 	                $scope.model.data.weekdays.push(model);
 	            });
