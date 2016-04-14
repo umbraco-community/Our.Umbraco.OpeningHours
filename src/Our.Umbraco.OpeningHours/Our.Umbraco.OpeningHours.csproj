@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
     </ProductVersion>
@@ -242,13 +242,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
+    <None Include="Properties\AssemblyInfo.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -276,11 +270,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>REM IF NOT "$(SolutionDir)" == "*Undefined*" (
-REM xcopy /s /y "$(TargetPath)" "C:\Users\Matt\Work\TheOutfield\WelcomeToYorkshireREM \Website\Src\WelcomeToYorkshire.Website\bin"
-REM xcopy /s /y "$(TargetDir)$(ProjectName).pdb" "C:\Users\Matt\Work\TheOutfieldREM \WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website\bin"
-REM xcopy /s /y "$(ProjectDir)Web\UI\*.*" "C:\Users\Matt\Work\TheOutfieldREM \WelcomeToYorkshire\Website\Src\WelcomeToYorkshire.Website"
-REM )</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\build\UpdateAssemblyInfoJson.exe" "$(ProjectPath)" "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

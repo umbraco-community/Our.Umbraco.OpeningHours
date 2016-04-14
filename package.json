@@ -1,0 +1,21 @@
+{
+  "name": "Our.Umbraco.OpeningHours",
+  "url": "https://github.com/bomortensen/Our.Umbraco.OpeningHours",
+  "license": {
+    "name": "MIT",
+    "url": "https://github.com/bomortensen/Our.Umbraco.OpeningHours/blob/master/LICENSE.md"
+  },
+  "author": {
+    "name": "Bo Mortensen, Anders Bjerner, Matt Brailsford",
+    "url": "https://our.umbraco.org/projects/backoffice-extensions/ourumbracoopeninghours/"
+  },
+  "readme": "An Umbraco property editor for handling opening hours.",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-nuget": "~0.1.4",
+    "grunt-zip": "~0.17.0",
+    "grunt-umbraco-package": "1.0.0",
+    "grunt-contrib-clean": "^0.6.0"
+  }
+}

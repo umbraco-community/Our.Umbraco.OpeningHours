@@ -11,3 +11,5 @@ Thumbs.db
 
 artifacts/
 src/packages/
+node_modules/
+releases/files/
