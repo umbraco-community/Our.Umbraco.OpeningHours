@@ -1,0 +1,10 @@
+{
+  "title": "Our.Umbraco.OpeningHours",
+  "description": "An Umbraco property editor for handling opening hours.",
+  "company": "Bo Mortensen & The Umbraco Community",
+  "product": "Our.Umbraco.OpeningHours",
+  "copyright": "Copyright © 2016",
+  "version": "1.0.0.0",
+  "informationalVersion": "1.0.0",
+  "fileVersion": "1.0.0.0"
+}

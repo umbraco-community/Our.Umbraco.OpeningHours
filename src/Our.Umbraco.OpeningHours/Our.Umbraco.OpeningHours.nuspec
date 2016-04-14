@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Bo Mortensen & The Umbraco Community</authors>
+    <owners>Bo Mortensen & The Umbraco Community</owners>
+    <licenseUrl>https://github.com/bomortensen/Our.Umbraco.OpeningHours/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/bomortensen/Our.Umbraco.OpeningHours</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <tags>Umbraco, Our, Opening Hours</tags>
+  </metadata>
+</package>
