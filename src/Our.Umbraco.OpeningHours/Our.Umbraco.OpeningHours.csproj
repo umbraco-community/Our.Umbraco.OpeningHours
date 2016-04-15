@@ -242,6 +242,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Our.Umbraco.OpeningHours.nuspec" />
     <None Include="Properties\AssemblyInfo.json" />
   </ItemGroup>
   <PropertyGroup>
