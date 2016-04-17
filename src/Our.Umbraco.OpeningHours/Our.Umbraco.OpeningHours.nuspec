@@ -4,8 +4,8 @@
     <id>$id$</id>
     <version>$version$</version>
     <title>$title$</title>
-    <authors>Bo Mortensen & The Umbraco Community</authors>
-    <owners>Bo Mortensen & The Umbraco Community</owners>
+    <authors>Bo Mortensen &amp; The Umbraco Community</authors>
+    <owners>Bo Mortensen &amp; The Umbraco Community</owners>
     <licenseUrl>https://github.com/bomortensen/Our.Umbraco.OpeningHours/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/bomortensen/Our.Umbraco.OpeningHours</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
