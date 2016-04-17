@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Our.Umbraco.OpeningHours.Model {
     
@@ -144,13 +145,7 @@ namespace Our.Umbraco.OpeningHours.Model {
             HolidayOpeningHours hoh = GetHoliday(date);
 
             // Initialize the instance for the day
-            return new OpeningHoursDay {
-                IsOpen = hoh == null ? woh.IsOpen : hoh.IsOpen,
-                Date = date,
-                Label = hoh == null ? null : hoh.Label,
-                Opens = date.Add(hoh == null ? woh.Opens : hoh.Opens),
-                Closes = date.Add(hoh == null ? woh.Closes : hoh.Closes)
-            };
+            return new OpeningHoursDay(date, woh, hoh);
 
         }
 
@@ -171,6 +166,30 @@ namespace Our.Umbraco.OpeningHours.Model {
             }
 
             return upcomingDays;
+
+        }
+
+        #endregion
+
+        #region Static methods
+
+        public static OpeningHours Deserialize(string str) {
+
+            // Return an empty model if the JSON string is empty
+            if (String.IsNullOrWhiteSpace(str)) return new OpeningHours();
+
+            // Since JSON.net will populate the properties after the constructor has been called,
+            // we need to do a little extra work here
+            JObject json = JsonConvert.DeserializeObject<JObject>(str);
+            JObject jsonWeekdays = json.GetValue("weekdays") as JObject ?? new JObject();
+            JArray jsonHolidays = json.GetValue("holidays") as JArray ?? new JArray();
+
+            // Parse the JSON to strongly typed collections
+            Dictionary<DayOfWeek, WeekdayOpeningHours> weekdays = jsonWeekdays.ToObject<Dictionary<DayOfWeek, WeekdayOpeningHours>>();
+            List<HolidayOpeningHours> holidays = jsonHolidays.ToObject<List<HolidayOpeningHours>>();
+
+            // Initialize the model through the correct constructor
+            return new OpeningHours(weekdays, holidays);
 
         }
 

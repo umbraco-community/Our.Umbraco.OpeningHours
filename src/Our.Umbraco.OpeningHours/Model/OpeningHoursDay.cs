@@ -12,29 +12,41 @@ namespace Our.Umbraco.OpeningHours.Model {
         #region Properties
 
         /// <summary>
+        /// Gets a reference to the weekday this day is based on.
+        /// </summary>
+        public WeekdayOpeningHours Weekday { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the holiday this day is based on, or <code>null</code> if not present.
+        /// </summary>
+        public HolidayOpeningHours Holiday { get; private set; }
+
+        /// <summary>
         /// Gets where the entity is open this day.
         /// </summary>
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get; private set; }
 
         /// <summary>
         /// Gets whether the entity is closed this day.
         /// </summary>
-        public bool IsClosed { get; set; }
+        public bool IsClosed {
+            get { return !IsOpen; }
+        }
 
         /// <summary>
         /// Gets the date of the day.
         /// </summary>
-        public DateTime Date { get; set; }
+        public DateTime Date { get; private set; }
 
         /// <summary>
         /// Gets an instance of <see cref="DateTime"/> representing the opening time of the entity.
         /// </summary>
-        public DateTime Opens { get; set; }
+        public DateTime Opens { get; private set; }
 
         /// <summary>
         /// Gets an instance of <see cref="DateTime"/> representing the closing time of the entity.
         /// </summary>
-        public DateTime Closes { get; set; }
+        public DateTime Closes { get; private set; }
 
         /// <summary>
         /// Gets the weekday of the week.
@@ -105,7 +117,15 @@ namespace Our.Umbraco.OpeningHours.Model {
 
         #region Constructors
 
-        internal OpeningHoursDay() { }
+        public OpeningHoursDay(DateTime date, WeekdayOpeningHours weekday, HolidayOpeningHours holiday) {
+            Date = date;
+            Weekday = weekday;
+            Holiday = holiday;
+            IsOpen = holiday == null ? weekday.IsOpen : holiday.IsOpen;
+            Label = holiday == null ? null : holiday.Label;
+            Opens = date.Add(holiday == null ? weekday.Opens : holiday.Opens);
+            Closes = date.Add(holiday == null ? weekday.Closes : holiday.Closes);
+        }
 
         #endregion
 

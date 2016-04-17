@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
@@ -20,11 +18,7 @@ namespace Our.Umbraco.OpeningHours.Converters
         {
             try
             {
-                if (source != null && !source.ToString().IsNullOrWhiteSpace())
-                {
-                    var oh = JsonConvert.DeserializeObject<Model.OpeningHours>(source.ToString());
-                    return oh;
-                }
+                return Model.OpeningHours.Deserialize(source as string);
             }
             catch (Exception e)
             {
