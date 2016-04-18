@@ -4,7 +4,7 @@
   <area alias="openingHours">
 
     <key alias="weekdayTitle">Weekday opening hours</key>
-    <key alias="holidaysTitle">Holiday opening hours</key>
+    <key alias="holidayTitle">Holiday opening hours</key>
 
     <key alias="addHoliday">Add holiday</key>
 
