@@ -47,6 +47,7 @@
 
 	                model.day = val.id;
 	                model.label = val.name;
+	                model.key = 'openingHours_' + val.alias;
 
 	                $scope.model.data.weekdays.push(model);
 	            });
