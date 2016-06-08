@@ -1,60 +1,60 @@
 {       
-    propertyEditors: [      
+    "propertyEditors": [      
         {            
-            alias: "OpeningHours",
-            name: " Opening Hours",
-            icon: "icon-calendar-alt",
-            group: "Opening Hours",           
-            editor: {
-                view: "~/App_Plugins/OpeningHours/views/openingHours.html",
-				valueType: "JSON"
+            "alias": "OpeningHours",
+            "name": " Opening Hours",
+            "icon": "icon-calendar-alt",
+            "group": "Opening Hours",           
+            "editor": {
+                "view": "~/App_Plugins/OpeningHours/views/openingHours.html",
+				"valueType": "JSON"
             },
-			prevalues: {
-				fields: [
+			"prevalues": {
+				"fields": [
 					{
-						label: "Require Holiday Dates",
-						description: "Select whether holiday opening hours should be for specific dates",
-						key: "requireHolidayDates",
-						view: "boolean"
+						"label": "Require Holiday Dates",
+						"description": "Select whether holiday opening hours should be for specific dates",
+						"key": "requireHolidayDates",
+						"view": "boolean"
 					}
 				]
 			}
         },
 		{            
-            alias: "WeekdayOpeningHours",
-            name: "Weekday Opening Hours",
-            icon: "icon-calendar-alt",
-            group: "Opening Hours", 
-            editor: {
-                view: "~/App_Plugins/OpeningHours/views/openingHours.weekday.html",
-				valueType: "JSON"
+            "alias": "WeekdayOpeningHours",
+            "name": "Weekday Opening Hours",
+            "icon": "icon-calendar-alt",
+            "group": "Opening Hours", 
+            "editor": {
+                "view": "~/App_Plugins/OpeningHours/views/openingHours.weekday.html",
+				"valueType": "JSON"
             }
         },
 		{            
-            alias: "HolidayOpeningHours",
-            name: "Holiday Opening Hours",
-            icon: "icon-calendar-alt",
-            group: "Opening Hours", 
-            editor: {
-                view: "~/App_Plugins/OpeningHours/views/openingHours.holiday.html",
-				valueType: "JSON"
+            "alias": "HolidayOpeningHours",
+            "name": "Holiday Opening Hours",
+            "icon": "icon-calendar-alt",
+            "group": "Opening Hours", 
+            "editor": {
+                "view": "~/App_Plugins/OpeningHours/views/openingHours.holiday.html",
+				"valueType": "JSON"
             },
-			prevalues: {
-				fields: [
+			"prevalues": {
+				"fields": [
 					{
-						label: "Require Holiday Dates",
-						description: "Select whether holiday opening hours should be for specific dates",
-						key: "requireHolidayDates",
-						view: "boolean"
+						"label": "Require Holiday Dates",
+						"description": "Select whether holiday opening hours should be for specific dates",
+						"key": "requireHolidayDates",
+						"view": "boolean"
 					}
 				]
 			}
         }
     ],    
-    javascript: [
-        '~/App_Plugins/OpeningHours/js/openingHours.controllers.js'		
+    "javascript": [
+        "~/App_Plugins/OpeningHours/js/openingHours.controllers.js"
     ],
-	css: [
-		'~/App_Plugins/OpeningHours/css/openingHours.css'
+	"css": [
+		"~/App_Plugins/OpeningHours/css/openingHours.css"
 	]
 }
