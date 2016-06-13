@@ -227,11 +227,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\OpeningHours\css\openingHours.css">
+      <DependentUpon>openingHours.less</DependentUpon>
+    </Content>
+    <Content Include="App_Plugins\OpeningHours\css\openingHours.min.css">
+      <DependentUpon>openingHours.css</DependentUpon>
+    </Content>
+    <Content Include="App_Plugins\OpeningHours\Directives\DatePicker.js" />
     <Content Include="App_Plugins\OpeningHours\js\openingHours.controllers.js" />
-    <Content Include="App_Plugins\OpeningHours\css\openingHours.css" />
+    <Content Include="App_Plugins\OpeningHours\css\openingHours_.css" />
+    <Content Include="App_Plugins\OpeningHours\js\openingHours.js" />
     <Content Include="App_Plugins\OpeningHours\lang\da-DK.xml" />
     <Content Include="App_Plugins\OpeningHours\lang\en-GB.xml" />
     <Content Include="App_Plugins\OpeningHours\lang\en-US.xml" />
+    <Content Include="App_Plugins\OpeningHours\views\openingHours.datePicker.html" />
     <Content Include="App_Plugins\OpeningHours\views\openingHours.holiday.html" />
     <Content Include="App_Plugins\OpeningHours\views\openingHours.weekday.html" />
     <Content Include="App_Plugins\OpeningHours\views\openingHours.timePicker.html" />
@@ -241,10 +250,12 @@
     <Content Include="App_Plugins\OpeningHours\package.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\OpeningHours\views\openingHours2.html" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Our.Umbraco.OpeningHours.nuspec" />
+    <Content Include="App_Plugins\OpeningHours\css\openingHours.less" />
     <None Include="Properties\AssemblyInfo.json" />
   </ItemGroup>
   <PropertyGroup>

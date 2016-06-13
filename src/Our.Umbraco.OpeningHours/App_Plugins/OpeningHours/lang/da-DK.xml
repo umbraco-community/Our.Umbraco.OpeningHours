@@ -21,5 +21,12 @@
     <key alias="friday">Fredag</key>
     <key alias="saturday">Lørdag</key>
     <key alias="sunday">Søndag</key>
+
+    <key alias="closed">Lukket</key>
+    <key alias="addOpeningHours">Tilføj åbningstider</key>
+    <key alias="from">fra</key>
+    <key alias="to">til</key>
+    <key alias="and">og</key>
+    
   </area>
 </language>

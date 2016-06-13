@@ -21,5 +21,11 @@
     <key alias="friday">Friday</key>
     <key alias="saturday">Saturday</key>
     <key alias="sunday">Sunday</key>
+
+    <key alias="closed">Closed</key>
+    <key alias="addOpeningHours">Add opening hours</key>
+    <key alias="from">from</key>
+    <key alias="to">to</key>
+    <key alias="and">and</key>
   </area>
 </language>

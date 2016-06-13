@@ -1,0 +1,85 @@
+﻿.OpeningHours {
+
+    .panel {
+        margin-bottom: 20px;
+        background-color: #fff;
+    }
+
+    .panel-heading {
+        padding: 10px 15px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        font-weight: bold;
+    }
+
+    .panel-default {
+        border-color: #ddd;
+    }
+
+    .panel-default>.panel-heading {
+        color: #333;
+        background-color: #f8f8f8;
+        border-color: #ddd;
+    }
+
+    .panel-body {
+        padding: 10px 0;
+    }
+
+    .table tbody td {
+        line-height: 27px;
+        line-height: 29px;
+        height: 30px;
+    }
+
+    .table tbody td select {
+        width: auto;
+        height: 30px;
+        padding: 2px;
+    }
+
+    td.time-col {
+        width: 100%;
+    }
+
+    .time-item {
+        white-space: nowrap;
+        display: inline-block;
+        background: #efefef;
+        padding: 0 5px;
+    }
+
+    td.text-col div {
+        width: 100px;
+        font-weight: bold;
+    }
+
+    a.remove-time {
+        color: red;
+    }
+
+    a.add-time {
+        color: #2E8AEA;
+    }
+
+    .table {
+        tr:first-child {
+            th, td {
+                border-top: 0;
+            }
+        }
+    }
+
+    // Give the date column a reasonable width
+    .date-col .datepickerinput  {
+        width: 80px;
+    }
+
+    // Makes sure the link for removing the date is hidden (because it messes with the UI)
+    .time-col .umb-datepicker p,
+    .date-col .umb-datepicker p {
+        display: none !important;
+    }
+
+}

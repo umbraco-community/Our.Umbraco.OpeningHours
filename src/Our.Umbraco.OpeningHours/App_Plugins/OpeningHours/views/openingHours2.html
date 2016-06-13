@@ -1,0 +1,129 @@
+﻿<div class="OpeningHours" ng-controller="openingHours.controllers.OpeningHoursController">
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <localize key="openingHours_weekdayTitle">Weekday opening hours</localize>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed week-days-table m0">
+                <!--<thead>
+                    <tr>
+                        <!--<th></th>-- >
+                        <th><localize key="openingHours_day">Day</localize></th>
+                        <th><localize key="openingHours_opens">Opens</localize>/<localize key="openingHours_closes">Closes</localize></th>
+                    </tr>
+                </thead>-->
+                <tbody>
+                    <tr ng-repeat="weekday in weekdays">
+                        <!--<td class="checkbox-col">
+                                <input type="checkbox" ng-model="workday.isOpen" />
+                            </td>-->
+                        <td class="text-col week-day-text">
+                            <div>
+                                <localize key="{{weekday.$key}}">{{weekday.$label}}</localize>
+                            </div>
+                        </td>
+                        <td class="time-col">
+                            <span ng-show="weekday.items.length > 0">
+                                <span ng-repeat="item in weekday.items">
+                                    <span ng-show="$index > 0"><localize key="openingHours_and">and</localize></span>
+                                    <span class="time-item">
+                                        <localize key="openingHours_from">from</localize>
+                                        <select ng-model="item.opens"><option ng-repeat="val in times">{{val}}</option></select>
+                                        <localize key="openingHours_to">to</localize>
+                                        <select ng-model="item.closes">
+                                            <option ng-repeat="val in times">{{val}}</option>
+                                        </select>
+                                        <a href="#" class="remove-time" prevent-default ng-click="removeItem(weekday, $index)"><i class="icon-delete"></i></a>
+                                    </span>
+                                </span>
+                                <a href="#" class="add-time" prevent-default ng-click="addItem(weekday)" ng-show="model.config.maxSplitTimes == 0 || weekday.items.length < model.config.maxSplitTimes"><i class="icon-add"></i></a>
+                            </span>
+                            <span ng-show="weekday.items.length == 0">
+                                <localize key="openingHours_closed">Closed</localize>.
+                                <a href="#" class="add-time" prevent-default ng-click="addItem(weekday)">
+                                    <localize key="openingHours_addOpeningHours">Add opening hours</localize>
+                                    <i class="icon-add"></i>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <localize key="openingHours_holidayTitle">Holiday opening hours</localize>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed week-days-table" ng-show="model.value.holidays.length > 0">
+                <!--<thead>
+                    <tr>
+                        <!--<th></th>-- >
+                        <th><localize key="openingHours_text">Text</localize></th>
+                        <th ng-if="requireHolidayDates"><localize key="openingHours_date">Date</localize></th>
+                        <th><localize key="openingHours_opens">Opens</localize>/<localize key="openingHours_closes">Closes</localize></th>
+                        <th></th>
+                    </tr>
+                </thead>-->
+                <tbody>
+                    <tr ng-repeat="holiday in model.value.holidays">
+                        <!--<td class="checkbox-col">
+                            <input type="checkbox" ng-model="holiday.isOpen" />
+                        </td>-->
+                        <td class="text-col">
+                            <input type="text" ng-model="holiday.label" placeholder="I.e. 'Christmas Day'" class="umb-editor umb-textstring" />
+                        </td>
+                        <td class="date-col" ng-if="model.config.requireHolidayDates">
+                            <oh-date-picker model="holiday.date" />
+                            <!--<umb-editor model="holiday.$datePicker"></umb-editor>
+                            <span ng-show="!holiday.$datePicker" style="color: red;">holiday.$datePicker not defined</span>-->
+                        </td>
+                        <td class="time-col">
+                            <span ng-show="holiday.items.length > 0">
+                                <span ng-repeat="item in holiday.items">
+                                    <span ng-show="$index > 0"><localize key="openingHours_and">and</localize></span>
+                                    <span class="time-item">
+                                        <localize key="openingHours_from">from</localize>
+                                        <select ng-model="item.opens"><option ng-repeat="val in times">{{val}}</option></select>
+                                        <localize key="openingHours_to">to</localize>
+                                        <select ng-model="item.closes">
+                                            <option ng-repeat="val in times">{{val}}</option>
+                                        </select>
+                                        <a href="#" class="remove-time" prevent-default ng-click="removeItem(holiday, $index)"><i class="icon-delete"></i></a>
+                                    </span>
+                                </span>
+                                <a href="#" class="add-time" prevent-default ng-click="addItem(holiday)" ng-show="model.config.maxSplitTimes == 0 || holiday.items.length < model.config.maxSplitTimes"><i class="icon-add"></i></a>
+                            </span>
+                            <span ng-show="holiday.items.length == 0">
+                                <localize key="openingHours_closed">Closed</localize>.
+                                <a href="#" class="add-time" prevent-default ng-click="addItem(holiday)">
+                                    <localize key="openingHours_addOpeningHours">Add opening hours</localize>
+                                    <i class="icon-add"></i>
+                                </a>
+                            </span>
+                        </td>
+                        <td class="delete-col">
+                            <a ng-click="deleteHolidayDay($index);"><i class="icon icon-delete"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="usky-grid" style="text-align: center;">
+                <div ng-show="model.value.holidays.length == 0" style="padding: 10px 0;">
+                    <div class="help-text">
+                        <localize key="openingHours_addHoliday"></localize>
+                    </div>
+                </div>
+                <a class="iconBox btn-add-opening-hours" ng-click="createHolidayDay();"><i class=" icon icon-add" title="Add" localize="title"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!--<pre style="font-size: 11px; line-height: 13px;">{{model.value | json}}</pre>
+    <pre style="font-size: 11px; line-height: 13px;">{{model.config | json}}</pre>-->
+
+</div>
