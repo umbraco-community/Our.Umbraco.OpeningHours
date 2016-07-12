@@ -29,7 +29,7 @@
                                 date: value.date,
                                 items: []
                             };
-                            if (value.opens && value.closes) {
+                            if (value.opens && value.closes && value.isOpen) {
                                 scope.value[key].items.push({
                                     opens: value.opens,
                                     closes: value.closes
