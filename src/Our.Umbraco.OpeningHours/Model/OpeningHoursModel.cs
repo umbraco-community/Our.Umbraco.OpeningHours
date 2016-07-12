@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Our.Umbraco.OpeningHours.Extensions.Json;
+using Our.Umbraco.OpeningHours.Json;
+using Our.Umbraco.OpeningHours.Model.Items;
+using Our.Umbraco.OpeningHours.Model.Json;
 
 namespace Our.Umbraco.OpeningHours.Model {
     
     /// <summary>
     /// Class representing the model of the <strong>Opening Hours</strong> property editor.
     /// </summary>
-    public class OpeningHours {
+    public class OpeningHoursModel : OpeningHoursJsonObject {
 
-        private readonly Dictionary<string, HolidayOpeningHours> _holidays;
+        private readonly Dictionary<string, OpeningHoursHolidayItem> _holidays;
 
         #region Properties
 
@@ -19,13 +23,14 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// Gets a dictionary of the standard weekdays as specified in the property editor.
         /// </summary>
         [JsonProperty("weekdays")]
-        public Dictionary<DayOfWeek, WeekdayOpeningHours> Weekdays { get; private set; }
+        [JsonConverter(typeof(OpeningHoursJsonConverter))]
+        public Dictionary<DayOfWeek, OpeningHoursWeekdayItem> Weekdays { get; private set; }
 
         /// <summary>
         /// Gets a list the holidays as specified in the property editor.
         /// </summary>
         [JsonProperty("holidays")]
-        public List<HolidayOpeningHours> Holidays { get; private set; }
+        public OpeningHoursHolidayItem[] Holidays { get; private set; }
 
         /// <summary>
         /// Gets whether the entity (store, company or similar) is currently open.
@@ -50,53 +55,71 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
-        public OpeningHours() {
-            Weekdays = new Dictionary<DayOfWeek, WeekdayOpeningHours>();
+        public OpeningHoursModel() : base(null) {
+            Weekdays = new Dictionary<DayOfWeek, OpeningHoursWeekdayItem>();
             for (int i = 0; i < 7; i++) {
-                Weekdays.Add((DayOfWeek) i, new WeekdayOpeningHours());
+                Weekdays.Add((DayOfWeek) i, OpeningHoursWeekdayItem.GetEmptyModel((DayOfWeek) i));
             }
-            Holidays = new List<HolidayOpeningHours>();
-            _holidays = new Dictionary<string, HolidayOpeningHours>();
+            Holidays = new OpeningHoursHolidayItem[0];
+            _holidays = new Dictionary<string, OpeningHoursHolidayItem>();
         }
 
+        ///// <summary>
+        ///// Initializes a new instance with the specified <code>weekdays</code> and <code>holidays</code>.
+        ///// </summary>
+        ///// <param name="weekdays">The weekdays that should make up the instance.</param>
+        ///// <param name="holidays">The holidays that should make up the model.</param>
+        //public OpeningHoursModel(Dictionary<DayOfWeek, OpeningHoursWeekdayItem> weekdays, OpeningHoursHolidayItem[] holidays) : base(null) {
+        //    Weekdays = weekdays ?? new Dictionary<DayOfWeek, OpeningHoursWeekdayItem>();
+        //    Holidays = holidays ?? new OpeningHoursHolidayItem[0];
+        //    _holidays = Holidays.Where(x => x.Date != null).ToDictionary(x => x.Date.ToString("yyyyMMdd"));
+        //}
+
         /// <summary>
-        /// Initializes a new instance with the specified <code>weekdays</code> and <code>holidays</code>.
+        /// Initializes a new instance from the specified <see cref="JObject"/>.
         /// </summary>
-        /// <param name="weekdays">The weekdays that should make up the instance.</param>
-        /// <param name="holidays">The holidays that should make up the model.</param>
-        public OpeningHours(Dictionary<DayOfWeek, WeekdayOpeningHours> weekdays, List<HolidayOpeningHours> holidays) {
-            Weekdays = weekdays ?? new Dictionary<DayOfWeek, WeekdayOpeningHours>();
-            Holidays = holidays ?? new List<HolidayOpeningHours>();
-            _holidays = Holidays.Where(x => x.Date != null).ToDictionary(x => x.Date.Value.ToString("yyyyMMdd"));
+        /// <param name="obj">The instance of <see cref="JObject"/> representing the model.</param>
+        private OpeningHoursModel(JObject obj) : base(obj) {
+
+            // Parse the weekdays
+            Weekdays = new Dictionary<DayOfWeek, OpeningHoursWeekdayItem>();
+            for (int i = 0; i < 7; i++) {
+                Weekdays.Add((DayOfWeek) i, obj.GetObject("weekdays." + i, OpeningHoursWeekdayItem.Parse));
+            }
+
+            // Parse holidays
+            Holidays = obj.GetArrayItems("holidays", OpeningHoursHolidayItem.Parse);
+            _holidays = Holidays.ToDictionary(x => x.Date.ToString("yyyyMMdd"));
+
         }
 
         #endregion
 
         #region Member methods
 
-        /// <summary>
-        /// Gets whether the entity is open at the specified <code>dayOfWeek</code>. Notice that since this is just the
-        /// weekday, holidays wion't be taken into account.
-        /// </summary>
-        /// <param name="dayOfWeek">The day of the week.</param>
-        /// <returns>Returns <code>true</code> if the entity is open at the specified <code>dayOfWeek</code>, otherwise
-        /// <code>false</code>.</returns>
-        public bool IsOpen(DayOfWeek dayOfWeek) {
-            return Weekdays[dayOfWeek].IsOpen;
-        }
+        ///// <summary>
+        ///// Gets whether the entity is open at the specified <code>dayOfWeek</code>. Notice that since this is just the
+        ///// weekday, holidays wion't be taken into account.
+        ///// </summary>
+        ///// <param name="dayOfWeek">The day of the week.</param>
+        ///// <returns>Returns <code>true</code> if the entity is open at the specified <code>dayOfWeek</code>, otherwise
+        ///// <code>false</code>.</returns>
+        //public bool IsOpen(DayOfWeek dayOfWeek) {
+        //    return Weekdays[dayOfWeek].IsOpen;
+        //}
 
-        /// <summary>
-        /// Gets whether the entity is open during the day of the specified <code>date</code>. If
-        /// <strong>Require Holiday Dates</strong> has been checked in the pre-value editor, holidays will be taken
-        /// into account as well.
-        /// </summary>
-        /// <param name="date">The date.</param>
-        /// <returns>Returns <code>true</code> if the entity is open during the day of the specified <code>date</code>,
-        /// otherwise <code>false</code>.</returns>
-        public bool IsOpen(DateTime date) {
-            HolidayOpeningHours holiday;
-            return _holidays.TryGetValue(date.ToString("yyyyMMdd"), out holiday) ? holiday.IsOpen : Weekdays[date.DayOfWeek].IsOpen;
-        }
+        ///// <summary>
+        ///// Gets whether the entity is open during the day of the specified <code>date</code>. If
+        ///// <strong>Require Holiday Dates</strong> has been checked in the pre-value editor, holidays will be taken
+        ///// into account as well.
+        ///// </summary>
+        ///// <param name="date">The date.</param>
+        ///// <returns>Returns <code>true</code> if the entity is open during the day of the specified <code>date</code>,
+        ///// otherwise <code>false</code>.</returns>
+        //public bool IsOpen(DateTime date) {
+        //    HolidayOpeningHours holiday;
+        //    return _holidays.TryGetValue(date.ToString("yyyyMMdd"), out holiday) ? holiday.IsOpen : Weekdays[date.DayOfWeek].IsOpen;
+        //}
 
         /// <summary>
         /// Gets whether the day at the specified <code>date</code> is a holiday. Notice that this check will only work
@@ -114,10 +137,10 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// represent a holiday.
         /// </summary>
         /// <param name="date">The date.</param>
-        /// <returns>Returns an instance of <see cref="HolidayOpeningHours"/> representing the holiday, or
+        /// <returns>Returns an instance of <see cref="OpeningHoursHolidayItem"/> representing the holiday, or
         /// <code>null</code> if the day doesn't represent a holiday.</returns>
-        public HolidayOpeningHours GetHoliday(DateTime date) {
-            HolidayOpeningHours holiday;
+        public OpeningHoursHolidayItem GetHoliday(DateTime date) {
+            OpeningHoursHolidayItem holiday;
             return _holidays.TryGetValue(date.ToString("yyyyMMdd"), out holiday) ? holiday : null;
         }
 
@@ -128,7 +151,7 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// <param name="date">The date.</param>
         /// <param name="holiday">A reference to the holiday.</param>
         /// <returns>Returns <code>true</code> if the day represents a holiday, otherwise <code>false</code>.</returns>
-        public bool TryGetHoliday(DateTime date, out HolidayOpeningHours holiday) {
+        public bool TryGetHoliday(DateTime date, out OpeningHoursHolidayItem holiday) {
             return _holidays.TryGetValue(date.ToString("yyyyMMdd"), out holiday);
         }
 
@@ -141,8 +164,8 @@ namespace Our.Umbraco.OpeningHours.Model {
         public OpeningHoursDay GetDay(DateTime date) {
 
             // Get information about the weekday (and whether it is a holiday)
-            WeekdayOpeningHours woh = Weekdays[date.DayOfWeek];
-            HolidayOpeningHours hoh = GetHoliday(date);
+            OpeningHoursWeekdayItem woh = Weekdays[date.DayOfWeek];
+            OpeningHoursHolidayItem hoh = GetHoliday(date);
 
             // Initialize the instance for the day
             return new OpeningHoursDay(date, woh, hoh);
@@ -173,24 +196,22 @@ namespace Our.Umbraco.OpeningHours.Model {
 
         #region Static methods
 
-        public static OpeningHours Deserialize(string str) {
+        public static OpeningHoursModel Deserialize(string str) {
 
             // Return an empty model if the JSON string is empty
-            if (String.IsNullOrWhiteSpace(str)) return new OpeningHours();
+            if (String.IsNullOrWhiteSpace(str)) return new OpeningHoursModel();
+            
+            // Parse the JSON and initialize the model through the correct constructor
+            return new OpeningHoursModel(JsonConvert.DeserializeObject<JObject>(str));
 
-            // Since JSON.net will populate the properties after the constructor has been called,
-            // we need to do a little extra work here
-            JObject json = JsonConvert.DeserializeObject<JObject>(str);
-            JObject jsonWeekdays = json.GetValue("weekdays") as JObject ?? new JObject();
-            JArray jsonHolidays = json.GetValue("holidays") as JArray ?? new JArray();
+        }
 
-            // Parse the JSON to strongly typed collections
-            Dictionary<DayOfWeek, WeekdayOpeningHours> weekdays = jsonWeekdays.ToObject<Dictionary<DayOfWeek, WeekdayOpeningHours>>();
-            List<HolidayOpeningHours> holidays = jsonHolidays.ToObject<List<HolidayOpeningHours>>();
-
-            // Initialize the model through the correct constructor
-            return new OpeningHours(weekdays, holidays);
-
+        /// <summary>
+        /// Gets an instance of <see cref="OpeningHoursModel"/> from the specified <see cref="JObject"/>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/> to parse.</param>
+        public static OpeningHoursModel Parse(JObject obj) {
+            return obj == null ? null : new OpeningHoursModel(obj);
         }
 
         #endregion

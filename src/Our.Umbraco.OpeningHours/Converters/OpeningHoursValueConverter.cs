@@ -7,7 +7,7 @@ using Our.Umbraco.OpeningHours.Model;
 
 namespace Our.Umbraco.OpeningHours.Converters
 {
-    [PropertyValueType(typeof(OpeningHours))]
+    [PropertyValueType(typeof(OpeningHoursModel))]
     [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
     public class OpeningHoursValueConverter : PropertyValueConverterBase
     {
@@ -20,7 +20,7 @@ namespace Our.Umbraco.OpeningHours.Converters
         {
             try
             {
-                return Model.OpeningHours.Deserialize(source as string);
+                return Model.OpeningHoursModel.Deserialize(source as string);
             }
             catch (Exception e)
             {
@@ -28,7 +28,7 @@ namespace Our.Umbraco.OpeningHours.Converters
             }
 
             // Create default model
-            return new Model.OpeningHours();
+            return new Model.OpeningHoursModel();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Our.Umbraco.OpeningHours.Model;
+using Our.Umbraco.OpeningHours.Model.Items;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
@@ -23,7 +24,7 @@ namespace Our.Umbraco.OpeningHours.Converters
             {
                 if (source != null && !source.ToString().IsNullOrWhiteSpace())
                 {
-                    var oh = JsonConvert.DeserializeObject<List<HolidayOpeningHours>>(source.ToString());
+                    var oh = JsonConvert.DeserializeObject<List<OpeningHoursHolidayItem>>(source.ToString());
                     return oh;
                 }
             }
@@ -33,7 +34,7 @@ namespace Our.Umbraco.OpeningHours.Converters
             }
 
             // Create default model
-            return new List<HolidayOpeningHours>();
+            return new List<OpeningHoursHolidayItem>();
         }
     }
 }

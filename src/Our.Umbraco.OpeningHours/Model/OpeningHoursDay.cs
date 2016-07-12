@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using Our.Umbraco.OpeningHours.Extensions;
+using Our.Umbraco.OpeningHours.Model.Items;
 
 namespace Our.Umbraco.OpeningHours.Model {
-    
+
     /// <summary>
     /// Class representing the opening hours of a day at a specific date.
     /// </summary>
@@ -14,20 +16,20 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// <summary>
         /// Gets a reference to the weekday this day is based on.
         /// </summary>
-        public WeekdayOpeningHours Weekday { get; private set; }
+        public OpeningHoursWeekdayItem Weekday { get; private set; }
 
         /// <summary>
         /// Gets a reference to the holiday this day is based on, or <code>null</code> if not present.
         /// </summary>
-        public HolidayOpeningHours Holiday { get; private set; }
+        public OpeningHoursHolidayItem Holiday { get; private set; }
 
         /// <summary>
-        /// Gets where the entity is open this day.
+        /// Gets where the entity is open at least once during the day.
         /// </summary>
         public bool IsOpen { get; private set; }
 
         /// <summary>
-        /// Gets whether the entity is closed this day.
+        /// Gets whether the entity is closed during the entire the day.
         /// </summary>
         public bool IsClosed {
             get { return !IsOpen; }
@@ -37,16 +39,6 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// Gets the date of the day.
         /// </summary>
         public DateTime Date { get; private set; }
-
-        /// <summary>
-        /// Gets an instance of <see cref="DateTime"/> representing the opening time of the entity.
-        /// </summary>
-        public DateTime Opens { get; private set; }
-
-        /// <summary>
-        /// Gets an instance of <see cref="DateTime"/> representing the closing time of the entity.
-        /// </summary>
-        public DateTime Closes { get; private set; }
 
         /// <summary>
         /// Gets the weekday of the week.
@@ -73,7 +65,7 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// Gets whether current time is today and within the opening hours.
         /// </summary>
         public bool IsCurrentlyOpen {
-            get { return IsToday && Opens <= DateTime.Now && DateTime.Now <= Closes; }
+            get { return IsToday && Items.Any(x => x.Opens <= DateTime.Now && DateTime.Now <= x.Closes); }
         }
 
         /// <summary>
@@ -113,18 +105,22 @@ namespace Our.Umbraco.OpeningHours.Model {
             get { return !String.IsNullOrEmpty(Label); }
         }
 
+        /// <summary>
+        /// Gets an array of the time slot of the day.
+        /// </summary>
+        public OpeningHoursDayTimeItem[] Items { get; private set; }
+
         #endregion
 
         #region Constructors
 
-        public OpeningHoursDay(DateTime date, WeekdayOpeningHours weekday, HolidayOpeningHours holiday) {
+        public OpeningHoursDay(DateTime date, OpeningHoursWeekdayItem weekday, OpeningHoursHolidayItem holiday) {
             Date = date;
             Weekday = weekday;
             Holiday = holiday;
             IsOpen = holiday == null ? weekday.IsOpen : holiday.IsOpen;
-            Label = holiday == null ? null : holiday.Label;
-            Opens = date.Add(holiday == null ? weekday.Opens : holiday.Opens);
-            Closes = date.Add(holiday == null ? weekday.Closes : holiday.Closes);
+            Label = holiday == null ? weekday.Label : holiday.Label;
+            Items = (holiday == null ? weekday.Items : holiday.Items).Select(x => new OpeningHoursDayTimeItem(date, x)).ToArray();
         }
 
         #endregion

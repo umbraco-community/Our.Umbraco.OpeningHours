@@ -218,12 +218,17 @@
     <Compile Include="Converters\HolidayOpeningHoursValueConverter.cs" />
     <Compile Include="Converters\WeekdayOpeningHoursValueConverter.cs" />
     <Compile Include="Converters\OpeningHoursValueConverter.cs" />
+    <Compile Include="Extensions\Json\JObjectExtensions.cs" />
     <Compile Include="Extensions\OpeningHoursExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Model\OpeningHours.cs" />
-    <Compile Include="Model\HolidayOpeningHours.cs" />
+    <Compile Include="Json\OpeningHoursJsonConverter.cs" />
+    <Compile Include="Model\Items\OpeningHoursDayTimeItem.cs" />
+    <Compile Include="Model\Items\OpeningHoursTimeItem.cs" />
+    <Compile Include="Model\Json\OpeningHoursJsonObject.cs" />
+    <Compile Include="Model\OpeningHoursModel.cs" />
+    <Compile Include="Model\Items\OpeningHoursHolidayItem.cs" />
     <Compile Include="Model\OpeningHoursDay.cs" />
-    <Compile Include="Model\WeekdayOpeningHours.cs" />
+    <Compile Include="Model\Items\OpeningHoursWeekdayItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
