@@ -3,9 +3,11 @@ using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
+using Our.Umbraco.OpeningHours.Model;
 
 namespace Our.Umbraco.OpeningHours.Converters
 {
+    [PropertyValueType(typeof(OpeningHours))]
     [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
     public class OpeningHoursValueConverter : PropertyValueConverterBase
     {
