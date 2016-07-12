@@ -6,7 +6,7 @@
             "icon": "icon-calendar-alt",
             "group": "Opening Hours",           
             "editor": {
-                "view": "~/App_Plugins/OpeningHours/views/openingHours2.html",
+                "view": "~/App_Plugins/OpeningHours/views/Editors/OpeningHours.Default.html",
 				"valueType": "JSON"
             },
 			"prevalues": {
@@ -38,9 +38,25 @@
             "icon": "icon-calendar-alt",
             "group": "Opening Hours", 
             "editor": {
-                "view": "~/App_Plugins/OpeningHours/views/openingHours.weekday.html",
+                "view": "~/App_Plugins/OpeningHours/views/Editors/OpeningHours.Weekdays.html",
 				"valueType": "JSON"
-            }
+            },
+			"prevalues": {
+				"fields": [
+					{
+						"label": "Enable split times",
+						"description": "Allows editors to specify multiple time periods for a given day.",
+						"key": "enableSplitTimes",
+						"view": "boolean"
+					},
+					{
+						"label": "Max times",
+						"description": "The maximum amount of opening hours that can be added (0 = unlimited).",
+						"key": "maxSplitTimes",
+						"view": "number"
+					}
+				]
+			}
         },
 		{            
             "alias": "HolidayOpeningHours",
@@ -48,16 +64,28 @@
             "icon": "icon-calendar-alt",
             "group": "Opening Hours", 
             "editor": {
-                "view": "~/App_Plugins/OpeningHours/views/openingHours.holiday.html",
+                "view": "~/App_Plugins/OpeningHours/views/Editors/OpeningHours.Holidays.html",
 				"valueType": "JSON"
             },
 			"prevalues": {
 				"fields": [
+                    {
+                        "label": "Require Holiday Dates",
+                        "description": "Select whether holiday opening hours should be for specific dates",
+                        "key": "requireHolidayDates",
+                        "view": "boolean"
+                    },
 					{
-						"label": "Require Holiday Dates",
-						"description": "Select whether holiday opening hours should be for specific dates",
-						"key": "requireHolidayDates",
+						"label": "Enable split times",
+						"description": "Allows editors to specify multiple time periods for a given day.",
+						"key": "enableSplitTimes",
 						"view": "boolean"
+					},
+					{
+						"label": "Max times",
+						"description": "The maximum amount of opening hours that can be added (0 = unlimited).",
+						"key": "maxSplitTimes",
+						"view": "number"
 					}
 				]
 			}
@@ -65,7 +93,8 @@
     ],    
     "javascript": [
         "~/App_Plugins/OpeningHours/Directives/DatePicker.js",
-        "~/App_Plugins/OpeningHours/js/openingHours.js"
+        "~/App_Plugins/OpeningHours/Directives/Weekdays.js",
+        "~/App_Plugins/OpeningHours/Directives/Holidays.js"
     ],
 	"css": [
 		"~/App_Plugins/OpeningHours/css/openingHours.css"

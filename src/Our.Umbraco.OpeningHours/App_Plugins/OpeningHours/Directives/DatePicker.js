@@ -5,7 +5,7 @@
         },
         restrict: 'E',
         replace: true,
-        templateUrl: '/App_Plugins/OpeningHours/Views/openingHours.datePicker.html',
+        templateUrl: '/App_Plugins/OpeningHours/Views/Directives/DatePicker.html',
         link: function (scope) {
 
             // Initialize the configuration of Umbraco's date picker

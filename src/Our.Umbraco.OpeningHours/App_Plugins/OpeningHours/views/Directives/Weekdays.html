@@ -1,0 +1,42 @@
+﻿<div class="OpeningHours">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <localize key="openingHours_weekdayTitle">Weekday opening hours</localize>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed week-days-table m0">
+                <tbody>
+                    <tr ng-repeat="weekday in weekdays">
+                        <td class="text-col week-day-text">
+                            <localize key="{{weekday.$key}}">{{weekday.$label}}</localize>
+                        </td>
+                        <td class="time-col">
+                            <span ng-show="weekday.items.length > 0">
+                                <span ng-repeat="item in weekday.items">
+                                    <span ng-show="$index > 0"><localize key="openingHours_and">and</localize></span>
+                                    <span class="time-item">
+                                        <localize key="openingHours_from">from</localize>
+                                        <select ng-model="item.opens"><option ng-repeat="val in times">{{val}}</option></select>
+                                        <localize key="openingHours_to">to</localize>
+                                        <select ng-model="item.closes">
+                                            <option ng-repeat="val in times">{{val}}</option>
+                                        </select>
+                                        <a href="#" class="remove-time" prevent-default ng-click="removeItem(weekday, $index)"><i class="icon-delete"></i></a>
+                                    </span>
+                                </span>
+                                <a href="#" class="add-time" prevent-default ng-click="addItem(weekday)" ng-show="config.maxSplitTimes == 0 || weekday.items.length < config.maxSplitTimes"><i class="icon-add"></i></a>
+                            </span>
+                            <span ng-show="weekday.items.length == 0">
+                                <localize key="openingHours_closed">Closed</localize>.
+                                <a href="#" class="add-time" prevent-default ng-click="addItem(weekday)">
+                                    <localize key="openingHours_addOpeningHours">Add opening hours</localize>
+                                    <i class="icon-add"></i>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

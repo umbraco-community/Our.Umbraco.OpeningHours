@@ -234,23 +234,22 @@
       <DependentUpon>openingHours.css</DependentUpon>
     </Content>
     <Content Include="App_Plugins\OpeningHours\Directives\DatePicker.js" />
-    <Content Include="App_Plugins\OpeningHours\js\openingHours.controllers.js" />
-    <Content Include="App_Plugins\OpeningHours\css\openingHours_.css" />
-    <Content Include="App_Plugins\OpeningHours\js\openingHours.js" />
+    <Content Include="App_Plugins\OpeningHours\Directives\Holidays.js" />
+    <Content Include="App_Plugins\OpeningHours\Directives\Weekdays.js" />
     <Content Include="App_Plugins\OpeningHours\lang\da-DK.xml" />
     <Content Include="App_Plugins\OpeningHours\lang\en-GB.xml" />
     <Content Include="App_Plugins\OpeningHours\lang\en-US.xml" />
-    <Content Include="App_Plugins\OpeningHours\views\openingHours.datePicker.html" />
-    <Content Include="App_Plugins\OpeningHours\views\openingHours.holiday.html" />
-    <Content Include="App_Plugins\OpeningHours\views\openingHours.weekday.html" />
-    <Content Include="App_Plugins\OpeningHours\views\openingHours.timePicker.html" />
-    <Content Include="App_Plugins\OpeningHours\views\openingHours.html" />
+    <Content Include="App_Plugins\OpeningHours\Views\Directives\Holidays.html" />
+    <Content Include="App_Plugins\OpeningHours\Views\Directives\DatePicker.html" />
+    <Content Include="App_Plugins\OpeningHours\Views\Editors\OpeningHours.Holidays.html" />
+    <Content Include="App_Plugins\OpeningHours\Views\Editors\OpeningHours.Weekday.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Plugins\OpeningHours\package.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Plugins\OpeningHours\views\openingHours2.html" />
+    <Content Include="App_Plugins\OpeningHours\Views\Editors\OpeningHours.Default.html" />
+    <Content Include="App_Plugins\OpeningHours\Views\Directives\Weekdays.html" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
