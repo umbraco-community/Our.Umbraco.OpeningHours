@@ -14,35 +14,68 @@ Manually unzip and move files to the root directory of your website.
 
 ### Usage
 
+To get the opening hours, you can simply use the `GetPropertyValue` method on the `IPublishedContent` holding the opening hours. Eg. as shown in this Razor partial:
+
+```C#
+@using Our.Umbraco.OpeningHours.Extensions
+@using Our.Umbraco.OpeningHours.Model
+
+@inherits UmbracoViewPage
+
+@{
+
+    OpeningHoursModel openingHours = Model.GetPropertyValue<OpeningHours>("openingHours");
+
+}
+```
+
+Alternatively you can use a special extension called `GetOpeningHours`. This method will ensure that you always get an instance of `OpeningHoursModel` - even if the property doesn't exist or doesn't have a value. The code for this would look like:
+
+```C#
+@using Our.Umbraco.OpeningHours.Extensions
+@using Our.Umbraco.OpeningHours.Model
+
+@inherits UmbracoViewPage
+
+@{
+
+    OpeningHoursModel openingHours = Model.GetOpeningHours();
+
+}
+```
+
 If using the **Opening Hours** property editor, you could list each weekday like in the example below.
 
 Once you have an instance of `OpeningHours`, you can either iterate through the weekdays using the `openingHours.Weekdays` property, or get a specific weekday like `openingHours.Weekdays[DayOfWeek.Monday]`.
 
 ```C#
+@using Our.Umbraco.OpeningHours.Extensions
 @using Our.Umbraco.OpeningHours.Model
+@using Our.Umbraco.OpeningHours.Model.Items
+
 @inherits UmbracoViewPage
-              
+
 @{
 
-    OpeningHours openingHours = Model.GetPropertyValue<OpeningHours>("openingHours");
-    
+    OpeningHoursModel openingHours = Model.GetOpeningHours();
+
     <div>
         We're currently <strong>@(openingHours.IsCurrentlyOpen ? "OPEN" : "CLOSED")</strong>
     </div>
-    
+
     <hr />
 
     <table>
-        @foreach (KeyValuePair<DayOfWeek, WeekdayOpeningHours> pair in openingHours.Weekdays) {
+        @foreach (KeyValuePair<DayOfWeek, OpeningHoursWeekdayItem> pair in openingHours.Weekdays) {
             <tr>
                 <td>
                     <strong>@pair.Key</strong>
                 </td>
                 <td>
                     @if (pair.Value.IsOpen) {
-                        <text>@pair.Value.Opens&ndash;@pair.Value.Closes</text>
+                        @(String.Join(", ", from item in pair.Value.Items select item.Opens + " - " + item.Closes))
                     } else {
-                        <em>Closed</em>
+                        <em>Closed!</em>
                     }
                 </td>
             </tr>
@@ -57,34 +90,44 @@ The above example only represents weekdays - not specific dates. The property ed
 In the Razor example below, the next 10 days are shown whether the store is closed or the their opening hours if open:
 
 ```C#
+@using Our.Umbraco.OpeningHours.Extensions
 @using Our.Umbraco.OpeningHours.Model
+
 @inherits UmbracoViewPage
-              
+
 @{
 
-    OpeningHours openingHours = Model.GetPropertyValue<OpeningHours>("openingHours");
+    OpeningHoursModel openingHours = Model.GetOpeningHours();
     
     <div>
         We're currently <strong>@(openingHours.IsCurrentlyOpen ? "OPEN" : "CLOSED")</strong>
     </div>
-    
-    <hr />
 
-    <table>
-        @foreach (OpeningHoursDay day in openingHours.GetUpcomingDays(10)) {
+    <table class="openingHours">
+        <thead>
             <tr>
-                <th>@(day.HasLabel ? day.Label : day.WeekDayName):</th>
-                @if (day.IsClosed) {
-                    <td>Closed</td>
-                } else {
-                    <td>
-                        @day.Opens.ToString("HH:mm")
-                        &ndash;
-                        @day.Closes.ToString("HH:mm")
-                    </td>
-                }
+                <th>Day</th>
+                <th>Opening hours</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @for (DateTime dt = DateTime.Today; dt <= DateTime.Now.AddDays(7); dt = dt.AddDays(1)) {
+                OpeningHoursDay day = openingHours.GetDay(dt);
+                <tr>
+                    <td>
+                        <strong>@day.Label</strong>
+                        <span style="color: #666; font-size: 11px;">(@day.Date.ToLongDateString())</span>
+                    </td>
+                    <td>
+                        @if (day.IsOpen) {
+                            @String.Join(", ", from item in day.Items select item.Opens.ToString("HH:mm") + " - " + item.Closes.ToString("HH:mm"))
+                        } else {
+                            <em>Closed!</em>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 
 }
