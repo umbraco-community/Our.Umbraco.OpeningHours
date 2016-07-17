@@ -215,8 +215,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\HolidayOpeningHoursValueConverter.cs" />
-    <Compile Include="Converters\WeekdayOpeningHoursValueConverter.cs" />
     <Compile Include="Converters\OpeningHoursValueConverter.cs" />
     <Compile Include="Extensions\Json\JObjectExtensions.cs" />
     <Compile Include="Extensions\OpeningHoursExtensions.cs" />
@@ -232,6 +230,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\OpeningHours\Controllers\OpeningHoursEditor.js" />
     <Content Include="App_Plugins\OpeningHours\css\openingHours.css">
       <DependentUpon>openingHours.less</DependentUpon>
     </Content>
