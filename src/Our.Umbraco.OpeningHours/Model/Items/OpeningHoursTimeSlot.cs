@@ -8,9 +8,9 @@ using Our.Umbraco.OpeningHours.Model.Json;
 namespace Our.Umbraco.OpeningHours.Model.Items {
 
     /// <summary>
-    /// Class representing a time item (or time slot really) of a day.
+    /// Class representing a time slot of a day at an unspecified date.
     /// </summary>
-    public class OpeningHoursTimeItem : OpeningHoursJsonObject {
+    public class OpeningHoursTimeSlot : OpeningHoursJsonObject {
 
         #region Properties
 
@@ -32,12 +32,12 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
 
         #region Constructors
 
-        private OpeningHoursTimeItem(JObject obj) : base(obj) {
+        private OpeningHoursTimeSlot(JObject obj) : base(obj) {
             Opens = obj.GetString("opens", TimeSpan.Parse);
             Closes = obj.GetString("closes", TimeSpan.Parse);
         }
 
-        internal OpeningHoursTimeItem(TimeSpan opens, TimeSpan closes) : base(null) {
+        internal OpeningHoursTimeSlot(TimeSpan opens, TimeSpan closes) : base(null) {
             Opens = opens;
             Closes = closes;
         }
@@ -47,11 +47,11 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <see cref="OpeningHoursTimeItem"/> from the specified <see cref="JObject"/>.
+        /// Gets an instance of <see cref="OpeningHoursTimeSlot"/> from the specified <see cref="JObject"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to parse.</param>
-        public static OpeningHoursTimeItem Parse(JObject obj) {
-            return obj == null ? null : new OpeningHoursTimeItem(obj);
+        public static OpeningHoursTimeSlot Parse(JObject obj) {
+            return obj == null ? null : new OpeningHoursTimeSlot(obj);
         }
 
         #endregion

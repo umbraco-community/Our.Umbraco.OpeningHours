@@ -2,7 +2,10 @@
 
 namespace Our.Umbraco.OpeningHours.Model.Items {
     
-    public class OpeningHoursDayTimeItem {
+    /// <summary>
+    /// Class representing a time slot of a day at a specific date.
+    /// </summary>
+    public class OpeningHoursDayTimeSlot {
 
         #region Properties
 
@@ -20,7 +23,7 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
 
         #region Constructors
 
-        public OpeningHoursDayTimeItem(DateTime date, OpeningHoursTimeItem time) {
+        public OpeningHoursDayTimeSlot(DateTime date, OpeningHoursTimeSlot time) {
             Opens = new DateTime(date.Year, date.Month, date.Day, time.Opens.Hours, time.Opens.Minutes, time.Opens.Seconds);
             Closes = new DateTime(date.Year, date.Month, date.Day, time.Closes.Hours, time.Closes.Minutes, time.Closes.Seconds);
         }

@@ -20,7 +20,7 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
         /// Gets an array of the time slots of the day.
         /// </summary>
         [JsonProperty("items", Order = 3)]
-        public OpeningHoursTimeItem[] Items { get; private set; }
+        public OpeningHoursTimeSlot[] Items { get; private set; }
 
         /// <summary>
         /// Gets where the entity has at least one open time slot throughout the day.
@@ -52,7 +52,7 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
 
         protected OpeningHoursWeekdayItem(JObject obj) : base(obj) {
             Label = obj.GetString("label") ?? "";
-            Items = obj.GetArray("items", OpeningHoursTimeItem.Parse);
+            Items = obj.GetArray("items", OpeningHoursTimeSlot.Parse);
             ParseLegacyValues();
         }
 
@@ -69,10 +69,10 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
                 TimeSpan opens = JObject.GetString("opens", TimeSpan.Parse);
                 TimeSpan closes = JObject.GetString("closes", TimeSpan.Parse);
                 Items = new[] {
-                    new OpeningHoursTimeItem(opens, closes)
+                    new OpeningHoursTimeSlot(opens, closes)
                 };
             } else {
-                Items = new OpeningHoursTimeItem[0];
+                Items = new OpeningHoursTimeSlot[0];
             }
         }
 
@@ -90,7 +90,7 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
         }
 
         /// <summary>
-        /// Gets an instance of <see cref="OpeningHoursTimeItem"/> from the specified <see cref="JObject"/>.
+        /// Gets an instance of <see cref="OpeningHoursTimeSlot"/> from the specified <see cref="JObject"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to parse.</param>
         public static OpeningHoursWeekdayItem Parse(JObject obj) {

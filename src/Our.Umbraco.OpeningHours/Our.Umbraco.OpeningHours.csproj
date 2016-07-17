@@ -220,8 +220,8 @@
     <Compile Include="Extensions\OpeningHoursExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Json\OpeningHoursJsonConverter.cs" />
-    <Compile Include="Model\Items\OpeningHoursDayTimeItem.cs" />
-    <Compile Include="Model\Items\OpeningHoursTimeItem.cs" />
+    <Compile Include="Model\Items\OpeningHoursDayTimeSlot.cs" />
+    <Compile Include="Model\Items\OpeningHoursTimeSlot.cs" />
     <Compile Include="Model\Json\OpeningHoursJsonObject.cs" />
     <Compile Include="Model\OpeningHoursModel.cs" />
     <Compile Include="Model\Items\OpeningHoursHolidayItem.cs" />

@@ -108,7 +108,7 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// <summary>
         /// Gets an array of the time slot of the day.
         /// </summary>
-        public OpeningHoursDayTimeItem[] Items { get; private set; }
+        public OpeningHoursDayTimeSlot[] Items { get; private set; }
 
         #endregion
 
@@ -120,7 +120,7 @@ namespace Our.Umbraco.OpeningHours.Model {
             Holiday = holiday;
             IsOpen = holiday == null ? weekday.IsOpen : holiday.IsOpen;
             Label = holiday == null ? weekday.Label : holiday.Label;
-            Items = (holiday == null ? weekday.Items : holiday.Items).Select(x => new OpeningHoursDayTimeItem(date, x)).ToArray();
+            Items = (holiday == null ? weekday.Items : holiday.Items).Select(x => new OpeningHoursDayTimeSlot(date, x)).ToArray();
         }
 
         #endregion
