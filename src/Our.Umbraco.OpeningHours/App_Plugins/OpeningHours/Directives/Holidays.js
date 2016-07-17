@@ -15,7 +15,7 @@
             }
 
             // Ensure properties of the configuration object
-            scope.config.optionalHolidayDates = parseBoolean(scope.config.optionalHolidayDates);
+            scope.config.hideHolidayDates = parseBoolean(scope.config.hideHolidayDates);
             scope.config.allowMultipleTimeSlots = parseBoolean(scope.config.allowMultipleTimeSlots);
             scope.config.maxTimeSlots = scope.config.allowMultipleTimeSlots ? parseInt(scope.config.maxTimeSlots) : 1;
 

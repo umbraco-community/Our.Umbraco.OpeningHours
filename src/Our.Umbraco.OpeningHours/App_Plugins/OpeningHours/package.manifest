@@ -12,21 +12,21 @@
             "prevalues": {
                 "fields": [
                     {
-                        "label": "Disable weekdays",
+                        "label": "Hide weekdays",
                         "description": "If selected, the part of the UI for entering weekdays will not be shown.",
-                        "key": "disableWeekdays",
+                        "key": "hideWeekdays",
                         "view": "boolean"
                     },
                     {
-                        "label": "Disable holidays",
+                        "label": "Hide holidays",
                         "description": "If selected, the part of the UI for entering holidays will not be shown.",
-                        "key": "disableHolidays",
+                        "key": "hideHolidays",
                         "view": "boolean"
                     },
                     {
-                        "label": "Optional holiday dates",
-                        "description": "If selected, holiday dates will no longer be required.",
-                        "key": "optionalHolidayDates",
+                        "label": "Hide holiday dates",
+                        "description": "If selected, the date field of a holiday will not be shown.",
+                        "key": "hideHolidayDates",
                         "view": "boolean"
                     },
                     {

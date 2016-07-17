@@ -10,7 +10,7 @@
                         <td class="text-col">
                             <input type="text" ng-model="holiday.label" placeholder="I.e. 'Christmas Day'" class="umb-editor umb-textstring" />
                         </td>
-                        <td class="date-col" ng-if="config.requireHolidayDates">
+                        <td class="date-col" ng-if="!config.hideHolidayDates">
                             <oh-date-picker model="holiday.date" />
                         </td>
                         <td class="time-col">

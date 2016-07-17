@@ -6,7 +6,7 @@
     }
 
     // Ensure properties of the configuration object
-    $scope.model.config.disableWeekdays = parseBoolean($scope.model.config.disableWeekdays);
-    $scope.model.config.disableHolidays = parseBoolean($scope.model.config.disableHolidays);
+    $scope.model.config.hideWeekdays = parseBoolean($scope.model.config.hideWeekdays);
+    $scope.model.config.hideHolidays = parseBoolean($scope.model.config.hideHolidays);
 
 }); 
