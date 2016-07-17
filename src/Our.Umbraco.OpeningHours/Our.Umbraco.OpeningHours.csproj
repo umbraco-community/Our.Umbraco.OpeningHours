@@ -246,14 +246,12 @@
     <Content Include="App_Plugins\OpeningHours\lang\en-US.xml" />
     <Content Include="App_Plugins\OpeningHours\Views\Directives\Holidays.html" />
     <Content Include="App_Plugins\OpeningHours\Views\Directives\DatePicker.html" />
-    <Content Include="App_Plugins\OpeningHours\Views\Editors\OpeningHours.Holidays.html" />
-    <Content Include="App_Plugins\OpeningHours\Views\Editors\OpeningHours.Weekday.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Plugins\OpeningHours\package.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Plugins\OpeningHours\Views\Editors\OpeningHours.Default.html" />
+    <Content Include="App_Plugins\OpeningHours\Views\Editors\OpeningHours.html" />
     <Content Include="App_Plugins\OpeningHours\Views\Directives\Weekdays.html" />
     <Content Include="packages.config" />
   </ItemGroup>

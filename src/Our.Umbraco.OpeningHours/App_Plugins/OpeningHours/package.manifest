@@ -1,100 +1,55 @@
-{       
-    "propertyEditors": [      
-        {            
+{
+    "propertyEditors": [
+        {
             "alias": "OpeningHours",
             "name": " Opening Hours",
             "icon": "icon-calendar-alt",
-            "group": "Opening Hours",           
+            "group": "Opening Hours",
             "editor": {
-                "view": "~/App_Plugins/OpeningHours/views/Editors/OpeningHours.Default.html",
-				"valueType": "JSON"
+                "view": "~/App_Plugins/OpeningHours/views/Editors/OpeningHours.html",
+                "valueType": "JSON"
             },
-			"prevalues": {
-				"fields": [
-					{
-						"label": "Require Holiday Dates",
-						"description": "Select whether holiday opening hours should be for specific dates.",
-						"key": "requireHolidayDates",
-						"view": "boolean"
-					},
-					{
-						"label": "Enable split times",
-						"description": "Allows editors to specify multiple time periods for a given day.",
-						"key": "enableSplitTimes",
-						"view": "boolean"
-					},
-					{
-						"label": "Max times",
-						"description": "The maximum amount of opening hours that can be added (0 = unlimited).",
-						"key": "maxSplitTimes",
-						"view": "number"
-					}
-				]
-			}
-        },
-		{            
-            "alias": "WeekdayOpeningHours",
-            "name": "Weekday Opening Hours",
-            "icon": "icon-calendar-alt",
-            "group": "Opening Hours", 
-            "editor": {
-                "view": "~/App_Plugins/OpeningHours/views/Editors/OpeningHours.Weekdays.html",
-				"valueType": "JSON"
-            },
-			"prevalues": {
-				"fields": [
-					{
-						"label": "Enable split times",
-						"description": "Allows editors to specify multiple time periods for a given day.",
-						"key": "enableSplitTimes",
-						"view": "boolean"
-					},
-					{
-						"label": "Max times",
-						"description": "The maximum amount of opening hours that can be added (0 = unlimited).",
-						"key": "maxSplitTimes",
-						"view": "number"
-					}
-				]
-			}
-        },
-		{            
-            "alias": "HolidayOpeningHours",
-            "name": "Holiday Opening Hours",
-            "icon": "icon-calendar-alt",
-            "group": "Opening Hours", 
-            "editor": {
-                "view": "~/App_Plugins/OpeningHours/views/Editors/OpeningHours.Holidays.html",
-				"valueType": "JSON"
-            },
-			"prevalues": {
-				"fields": [
+            "prevalues": {
+                "fields": [
                     {
-                        "label": "Require Holiday Dates",
-                        "description": "Select whether holiday opening hours should be for specific dates",
-                        "key": "requireHolidayDates",
+                        "label": "Disable weekdays",
+                        "description": "If selected, the part of the UI for entering weekdays will not be shown.",
+                        "key": "disableWeekdays",
                         "view": "boolean"
                     },
-					{
-						"label": "Enable split times",
-						"description": "Allows editors to specify multiple time periods for a given day.",
-						"key": "enableSplitTimes",
-						"view": "boolean"
-					},
-					{
-						"label": "Max times",
-						"description": "The maximum amount of opening hours that can be added (0 = unlimited).",
-						"key": "maxSplitTimes",
-						"view": "number"
-					}
-				]
-			}
+                    {
+                        "label": "Disable holidays",
+                        "description": "If selected, the part of the UI for entering holidays will not be shown.",
+                        "key": "disableHolidays",
+                        "view": "boolean"
+                    },
+                    {
+                        "label": "Optional holiday dates",
+                        "description": "If selected, holiday dates will no longer be required.",
+                        "key": "optionalHolidayDates",
+                        "view": "boolean"
+                    },
+                    {
+                        "label": "Allow multiple time slots",
+                        "description": "Allows editors to specify multiple time slots for a given day.",
+                        "key": "allowMultipleTimeSlots",
+                        "view": "boolean"
+                    },
+                    {
+                        "label": "Max time slots",
+                        "description": "The maximum amount of time slots that can be added (0 = unlimited).",
+                        "key": "maxTimeSlots",
+                        "view": "number"
+                    }
+                ]
+            }
         }
     ],    
     "javascript": [
         "~/App_Plugins/OpeningHours/Directives/DatePicker.js",
         "~/App_Plugins/OpeningHours/Directives/Weekdays.js",
-        "~/App_Plugins/OpeningHours/Directives/Holidays.js"
+        "~/App_Plugins/OpeningHours/Directives/Holidays.js",
+        "~/App_Plugins/OpeningHours/Controllers/OpeningHoursEditor.js"
     ],
 	"css": [
 		"~/App_Plugins/OpeningHours/css/openingHours.css"

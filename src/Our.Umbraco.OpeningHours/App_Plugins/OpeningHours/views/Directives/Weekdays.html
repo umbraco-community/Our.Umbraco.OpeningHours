@@ -24,7 +24,7 @@
                                         <a href="#" class="remove-time" prevent-default ng-click="removeItem(weekday, $index)"><i class="icon-delete"></i></a>
                                     </span>
                                 </span>
-                                <a href="#" class="add-time" prevent-default ng-click="addItem(weekday)" ng-show="config.maxSplitTimes == 0 || weekday.items.length < config.maxSplitTimes"><i class="icon-add"></i></a>
+                                <a href="#" class="add-time" prevent-default ng-click="addItem(weekday)" ng-show="config.maxTimeSlots == 0 || weekday.items.length < config.maxTimeSlots"><i class="icon-add"></i></a>
                             </span>
                             <span ng-show="weekday.items.length == 0">
                                 <localize key="openingHours_closed">Closed</localize>.
@@ -39,4 +39,5 @@
             </table>
         </div>
     </div>
+<pre>{{config | json}}</pre>
 </div>

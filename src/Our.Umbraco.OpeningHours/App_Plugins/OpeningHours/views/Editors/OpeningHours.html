@@ -1,0 +1,4 @@
+﻿<div ng-controller="OpeningHours.Controllers.OpeningHoursController">
+    <oh-weekdays ng-if="!model.config.disableWeekdays" value="model.value.weekdays" config="model.config"></oh-weekdays>
+    <oh-holidays ng-if="!model.config.disableHolidays" value="model.value.holidays" config="model.config"></oh-holidays>
+</div>

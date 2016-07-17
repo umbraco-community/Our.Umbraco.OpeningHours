@@ -9,9 +9,14 @@
         templateUrl: '/App_Plugins/OpeningHours/Views/Directives/Weekdays.html',
         link: function (scope) {
 
+            function parseBoolean(str) {
+                str = str + '';
+                return str == '1' || str == 'true';
+            }
+
             // Ensure properties of the configuration object
-            scope.config.enableSplitTimes = !!scope.config.enableSplitTimes;
-            scope.config.maxSplitTimes = parseInt(scope.config.maxSplitTimes);
+            scope.config.allowMultipleTimeSlots = parseBoolean(scope.config.allowMultipleTimeSlots);
+            scope.config.maxTimeSlots = scope.config.allowMultipleTimeSlots ? parseInt(scope.config.maxTimeSlots) : 1;
 
             // Varius properties used for the UI
             scope.weekdays = [];
