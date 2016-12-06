@@ -1,8 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Our.Umbraco.OpeningHours.Extensions.Json;
 using Our.Umbraco.OpeningHours.Json;
+using Skybrud.Essentials.Json.Extensions;
 
 namespace Our.Umbraco.OpeningHours.Model.Items {
     

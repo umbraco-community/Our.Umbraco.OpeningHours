@@ -1,25 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Json;
 
 namespace Our.Umbraco.OpeningHours.Model.Json {
     
-    public class OpeningHoursJsonObject {
-
-        #region Properties
-
-        /// <summary>
-        /// Gets a reference to the <see cref="JObject"/> the object was parsed from.
-        /// </summary>
-        [JsonIgnore]
-        public JObject JObject { get; private set; }
-
-        #endregion
+    public class OpeningHoursJsonObject : JsonObjectBase {
 
         #region Constructors
 
-        protected OpeningHoursJsonObject(JObject obj) {
-            JObject = obj;
-        }
+        protected OpeningHoursJsonObject(JObject obj) : base(obj) { }
 
         #endregion
 

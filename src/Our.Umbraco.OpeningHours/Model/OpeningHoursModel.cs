@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Our.Umbraco.OpeningHours.Extensions.Json;
 using Our.Umbraco.OpeningHours.Json;
 using Our.Umbraco.OpeningHours.Model.Items;
 using Our.Umbraco.OpeningHours.Model.Json;
+using Skybrud.Essentials.Json.Extensions;
 
 namespace Our.Umbraco.OpeningHours.Model {
     
