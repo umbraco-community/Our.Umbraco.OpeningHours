@@ -41,9 +41,9 @@ namespace Our.Umbraco.OpeningHours.Model {
         public DateTime Date { get; private set; }
 
         /// <summary>
-        /// Gets the weekday of the week.
+        /// Gets the day of the week.
         /// </summary>
-        public DayOfWeek WeekDay {
+        public DayOfWeek DayOfWeek {
             get { return Date.DayOfWeek; }
         }
 
