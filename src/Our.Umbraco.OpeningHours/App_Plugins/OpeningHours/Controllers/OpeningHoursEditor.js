@@ -8,5 +8,7 @@
     // Ensure properties of the configuration object
     $scope.model.config.hideWeekdays = parseBoolean($scope.model.config.hideWeekdays);
     $scope.model.config.hideHolidays = parseBoolean($scope.model.config.hideHolidays);
-
+    
+    // Option to hide property label
+    $scope.model.hideLabel = parseBoolean($scope.model.config.hideLabel);
 }); 
