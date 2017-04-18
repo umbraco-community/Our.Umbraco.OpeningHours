@@ -29,7 +29,7 @@ namespace Our.Umbraco.OpeningHours.Extensions {
         /// <param name="propertyAlias">The alias of the property.</param>
         /// <returns>Returns an instance of <see cref="OpeningHoursModel"/>.</returns>
         public static OpeningHoursModel GetOpeningHours(this IPublishedContent content, string propertyAlias) {
-            OpeningHoursModel openingHours = content == null ? null : content.GetPropertyValue<OpeningHoursModel>("openingHours");
+            OpeningHoursModel openingHours = content == null ? null : content.GetPropertyValue<OpeningHoursModel>(propertyAlias);
             return openingHours ?? new OpeningHoursModel();
         }
 
