@@ -226,6 +226,9 @@
     <Compile Include="Model\Items\OpeningHoursDayTimeSlot.cs" />
     <Compile Include="Model\Items\OpeningHoursTimeSlot.cs" />
     <Compile Include="Model\Json\OpeningHoursJsonObject.cs" />
+    <Compile Include="Model\Offset\OpeningHoursDayOffset.cs" />
+    <Compile Include="Model\Offset\OpeningHoursDayTimeSlotOffset.cs" />
+    <Compile Include="Model\Offset\OpeningHoursOffsetModel.cs" />
     <Compile Include="Model\OpeningHoursModel.cs" />
     <Compile Include="Model\Items\OpeningHoursHolidayItem.cs" />
     <Compile Include="Model\OpeningHoursDay.cs" />

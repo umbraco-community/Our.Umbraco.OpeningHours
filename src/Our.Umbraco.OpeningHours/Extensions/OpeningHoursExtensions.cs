@@ -2,6 +2,7 @@
 using System.Linq;
 using Our.Umbraco.OpeningHours.Model;
 using Our.Umbraco.OpeningHours.Model.Items;
+using Our.Umbraco.OpeningHours.Model.Offset;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
@@ -31,6 +32,15 @@ namespace Our.Umbraco.OpeningHours.Extensions {
         public static OpeningHoursModel GetOpeningHours(this IPublishedContent content, string propertyAlias) {
             OpeningHoursModel openingHours = content == null ? null : content.GetPropertyValue<OpeningHoursModel>(propertyAlias);
             return openingHours ?? new OpeningHoursModel();
+        }
+
+        public static OpeningHoursOffsetModel GetOpeningHours(this IPublishedContent content, TimeZoneInfo timeZone) {
+            return GetOpeningHours(content, "openingHours", timeZone);
+        }
+
+        public static OpeningHoursOffsetModel GetOpeningHours(this IPublishedContent content, string propertyAlias, TimeZoneInfo timeZone) {
+            OpeningHoursModel model = GetOpeningHours(content, propertyAlias);
+            return new OpeningHoursOffsetModel(model, timeZone);
         }
 
         public static OpeningHoursWeekdayItem TodaysOpeningHours(this OpeningHoursModel model) {
@@ -100,5 +110,7 @@ namespace Our.Umbraco.OpeningHours.Extensions {
             //var closesIn = (int)(closingTime - timeOfDay).TotalMinutes;
             //return closesIn > 0 ? closesIn : -3;
         }
+
     }
+
 }

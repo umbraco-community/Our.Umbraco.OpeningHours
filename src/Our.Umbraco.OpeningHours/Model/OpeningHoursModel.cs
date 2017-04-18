@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using Our.Umbraco.OpeningHours.Json;
 using Our.Umbraco.OpeningHours.Model.Items;
 using Our.Umbraco.OpeningHours.Model.Json;
+using Our.Umbraco.OpeningHours.Model.Offset;
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Our.Umbraco.OpeningHours.Model {
@@ -131,6 +132,17 @@ namespace Our.Umbraco.OpeningHours.Model {
         public bool IsHoliday(DateTime date) {
             return _holidays.ContainsKey(date.ToString("yyyyMMdd"));
         }
+        
+        /// <summary>
+        /// Gets whether the day at the specified <paramref name="date"/> is a holiday. Notice that this check will
+        /// only work if <strong>Require Holiday Dates</strong> has been checked in the pre-value editor.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>Returns <code>true</code> if the day at the specified <code>date</code> is a holiday, otherwise
+        /// <code>false</code>.</returns>
+        public bool IsHoliday(DateTimeOffset date) {
+            return _holidays.ContainsKey(date.ToString("yyyyMMdd"));
+        }
 
         /// <summary>
         /// Gets a reference to the holiday at the specified <code>date</code>, or <code>null</code> if the day doesn't
@@ -156,6 +168,29 @@ namespace Our.Umbraco.OpeningHours.Model {
         }
 
         /// <summary>
+        /// Gets a reference to the holiday at the specified <paramref name="date"/>, or <code>null</code> if the day
+        /// doesn't represent a holiday.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>An instance of <see cref="OpeningHoursHolidayItem"/> representing the holiday, or
+        /// <code>null</code> if the day doesn't represent a holiday.</returns>
+        public OpeningHoursHolidayItem GetHoliday(DateTimeOffset date) {
+            OpeningHoursHolidayItem holiday;
+            return _holidays.TryGetValue(date.ToString("yyyyMMdd"), out holiday) ? holiday : null;
+        }
+
+        /// <summary>
+        /// Gets a reference to the holiday at the specified <paramref name="date"/>, or <code>null</code> if the day
+        /// doesn't represent a holiday.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="holiday">A reference to the holiday.</param>
+        /// <returns><code>true</code> if the day represents a holiday, otherwise <code>false</code>.</returns>
+        public bool TryGetHoliday(DateTimeOffset date, out OpeningHoursHolidayItem holiday) {
+            return _holidays.TryGetValue(date.ToString("yyyyMMdd"), out holiday);
+        }
+
+        /// <summary>
         /// Gets an instance of <see cref="OpeningHoursDay"/> representing the day at the specified <code>date</code>. If <strong>Require Holiday Dates</strong> has
         /// been checked in the pre-value editor, holidays will be taken into account as well.
         /// </summary>
@@ -169,6 +204,25 @@ namespace Our.Umbraco.OpeningHours.Model {
 
             // Initialize the instance for the day
             return new OpeningHoursDay(date, woh, hoh);
+
+        }
+
+        /// <summary>
+        /// Gets an instance of <see cref="OpeningHoursDayOffset"/> representing the day at the specified
+        /// <paramref name="date"/>. If <strong>Require Holiday Dates</strong> has been checked in the pre-value
+        /// editor, holidays will be taken into account as well.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>An instance of <see cref="OpeningHoursDayOffset"/> representing the day at the specified
+        /// <paramref name="date"/>.</returns>
+        public OpeningHoursDayOffset GetDay(DateTimeOffset date) {
+
+            // Get information about the weekday (and whether it is a holiday)
+            OpeningHoursWeekdayItem woh = Weekdays[date.DayOfWeek];
+            OpeningHoursHolidayItem hoh = GetHoliday(date);
+
+            // Initialize the instance for the day
+            return new OpeningHoursDayOffset(date, woh, hoh);
 
         }
 
@@ -188,6 +242,39 @@ namespace Our.Umbraco.OpeningHours.Model {
                 upcomingDays[i] = GetDay(DateTime.Today.AddDays(i));
             }
 
+            return upcomingDays;
+
+        }
+
+        /// <summary>
+        /// Gets an array of the next <paramref name="count"/> upcoming days. If <strong>Require Holiday Dates</strong>
+        /// has been checked in the pre-value editor, holidays will be incorporated into the result.
+        /// </summary>
+        /// <param name="count">The amount of days to be returned (including the current day).</param>
+        /// <param name="timeZone">The <see cref="TimeZoneInfo"/> that should be used.</param>
+        /// <returns>An array of <see cref="OpeningHoursDay"/> representing the opening hours of the upcoming days.</returns>
+        public OpeningHoursDayOffset[] GetUpcomingDays(int count, TimeZoneInfo timeZone) {
+
+            // Array containing the days
+            OpeningHoursDayOffset[] upcomingDays = new OpeningHoursDayOffset[count];
+
+            // Iterate through the days one by one
+            for (int i = 0; i < 14; i++) {
+
+                // Get the current timestamp (according to the specified time zone)
+                DateTimeOffset timeZoneNow = TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow, timeZone);
+
+                // Get the timestamp for the day
+                DateTimeOffset dt = timeZoneNow.AddDays(i);
+
+                OpeningHoursWeekdayItem weekday = Weekdays[dt.DayOfWeek];
+                OpeningHoursHolidayItem holiday = GetHoliday(dt);
+
+                upcomingDays[i] = new OpeningHoursDayOffset(dt, weekday, holiday);
+
+            }
+
+            // Return the array
             return upcomingDays;
 
         }
