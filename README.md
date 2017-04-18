@@ -24,7 +24,7 @@ To get the opening hours, you can simply use the `GetPropertyValue` method on th
 
 @{
 
-    OpeningHoursModel openingHours = Model.GetPropertyValue<OpeningHours>("openingHours");
+    OpeningHoursModel openingHours = Model.GetPropertyValue<OpeningHoursModel>("openingHours");
 
 }
 ```
