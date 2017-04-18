@@ -40,6 +40,12 @@
                         "description": "The maximum amount of time slots that can be added (0 = unlimited).",
                         "key": "maxTimeSlots",
                         "view": "number"
+                    },
+                    {
+                        "label": "Hide label",
+                        "description": "Set whether to hide the editor label and take up the full width of the editing area.",
+                        "key": "hideLabel",
+                        "view": "boolean"
                     }
                 ]
             }
