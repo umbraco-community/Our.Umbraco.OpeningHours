@@ -247,6 +247,8 @@
     <Content Include="App_Plugins\OpeningHours\Directives\Holidays.js" />
     <Content Include="App_Plugins\OpeningHours\Directives\Weekdays.js" />
     <Content Include="App_Plugins\OpeningHours\lang\da-DK.xml" />
+    <Content Include="App_Plugins\OpeningHours\lang\de-CH.xml" />
+    <Content Include="App_Plugins\OpeningHours\lang\de-DE.xml" />
     <Content Include="App_Plugins\OpeningHours\lang\en-GB.xml" />
     <Content Include="App_Plugins\OpeningHours\lang\en-US.xml" />
     <Content Include="App_Plugins\OpeningHours\Views\Directives\Holidays.html" />
