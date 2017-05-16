@@ -10,26 +10,47 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the date specified for this holiday item. If a date hasn't been specified,
+        /// <see cref="DateTime.MinValue"/> will be returned instead.
+        /// </summary>
         [JsonProperty("date", Order = 2)]
         [JsonConverter(typeof(OpeningHoursJsonConverter))]
         public DateTime Date { get; set; }
 
+        /// <summary>
+        /// Gets whether a date has been specified for this holiday item.
+        /// </summary>
         [JsonIgnore]
         public bool HasDate {
             get { return Date != default(DateTime); }
+        }
+
+        /// <summary>
+        /// Gets whether the holiday item is valid. Currently this property is just an alias of <see cref="HasDate"/>.
+        /// </summary>
+        [JsonIgnore]
+        public bool IsValid {
+            get { return HasDate; }
         }
 
         #endregion
 
         #region Constructors
 
-        protected OpeningHoursHolidayItem(JObject obj) : base(obj) {
-            Date = obj.GetString("date", DateTime.Parse);
+        protected OpeningHoursHolidayItem(JObject obj) : base(obj, default(DayOfWeek)) {
+            Date = obj.GetString("date", ParseDate);
+            DayOfWeek = Date.DayOfWeek;
         }
 
         #endregion
 
         #region Static methods
+
+        private DateTime ParseDate(string str) {
+            DateTime date;
+            return DateTime.TryParse(str ?? "", out date) ? date : default(DateTime);
+        }
 
         /// <summary>
         /// Initializes an empty instance.
