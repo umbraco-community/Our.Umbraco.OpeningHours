@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<language alias="da" intName="Deutsch (CH)" localName="Deutsch (CH)" lcid="6" culture="de-CH">
+  <area alias="openingHours">
+
+    <key alias="weekdayTitle">Öffnungszeiten Wochentage</key>
+    <key alias="holidayTitle">Öffnungszeiten Feiertage</key>
+    
+    <key alias="addHoliday">Feiertag hinzufügen</key>
+    
+    <key alias="day">Tag</key>
+    <key alias="date">Datum</key>
+    <key alias="text">Text</key>
+    <key alias="opens">Öffnet</key>
+    <key alias="closes">Schliesst</key>
+    
+    <key alias="monday">Montag</key>
+    <key alias="tuesday">Dienstag</key>
+    <key alias="wednesday">Mittwoch</key>
+    <key alias="thursday">Donnerstag</key>
+    <key alias="friday">Freitag</key>
+    <key alias="saturday">Samstag</key>
+    <key alias="sunday">Sonntag</key>
+
+    <key alias="closed">Geschlossen</key>
+    <key alias="addOpeningHours">Öffnungszeit hinzufügen</key>
+    <key alias="from">von</key>
+    <key alias="to">bis</key>
+    <key alias="and">und</key>
+    
+  </area>
+</language>
