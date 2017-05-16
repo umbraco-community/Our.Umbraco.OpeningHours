@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 
-<language alias="da" intName="Deutsch (DE)" localName="Deutsch (DE)" lcid="6" culture="de-DE">
+<language alias="da" intName="German (DE)" localName="Deutsch (DE)" lcid="1031" culture="de-DE">
   <area alias="openingHours">
 
     <key alias="weekdayTitle">Öffnungszeiten Wochentage</key>

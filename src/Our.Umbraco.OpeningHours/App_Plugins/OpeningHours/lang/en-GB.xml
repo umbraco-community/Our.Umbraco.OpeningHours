@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 
-<language alias="en" intName="English (UK)" localName="English (UK)" lcid="" culture="en-GB">
+<language alias="en" intName="English (UK)" localName="English (UK)" lcid="2057" culture="en-GB">
   <area alias="openingHours">
 
     <key alias="weekdayTitle">Weekday opening hours</key>
