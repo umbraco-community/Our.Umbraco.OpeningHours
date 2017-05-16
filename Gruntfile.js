@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 		pkg: pkg,
 		clean: {
 			files: [
-				'releases/files/**/*.*'
+				'releases/files/'
 			]
 		},
 		copy: {
@@ -28,6 +28,8 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: projectRoot + 'bin/',
 						src: [
+							'Skybrud.Essentials.dll',
+							'Skybrud.Essentials.xml',
 							pkg.name + '.dll',
 							pkg.name + '.xml'
 						],
@@ -86,7 +88,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-nuget');
 	grunt.loadNpmTasks('grunt-zip');
 
-	grunt.registerTask('dev', ['clean', 'copy', 'zip', 'umbracoPackage', 'nugetpack']);
+	grunt.registerTask('dev', ['clean', 'copy', 'zip', 'umbracoPackage', 'nugetpack', 'clean']);
 
 	grunt.registerTask('default', ['dev']);
 

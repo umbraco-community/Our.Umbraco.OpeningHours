@@ -3,8 +3,8 @@
   "description": "An Umbraco property editor for handling opening hours.",
   "company": "Bo Mortensen & The Umbraco Community",
   "product": "Our.Umbraco.OpeningHours",
-  "copyright": "Copyright © 2016",
+  "copyright": "Copyright © 2017",
   "version": "1.0.0.0",
-  "informationalVersion": "1.0.0-beta3",
+  "informationalVersion": "1.0.0",
   "fileVersion": "1.0.0.0"
 }
