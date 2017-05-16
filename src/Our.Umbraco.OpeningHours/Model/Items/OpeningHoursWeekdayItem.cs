@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Our.Umbraco.OpeningHours.Model.Json;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Strings.Extensions;
 
 namespace Our.Umbraco.OpeningHours.Model.Items {
     
     public class OpeningHoursWeekdayItem : OpeningHoursJsonObject {
 
         #region Properties
+
+        public DayOfWeek DayOfWeek { get; protected set; }
 
         /// <summary>
         /// Gets the label of the day.
@@ -46,11 +50,29 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
             get { return Items != null && Items.Length > 1; }
         }
 
+        /// <summary>
+        /// Gets the name of the weekday according to <see cref="CultureInfo.CurrentCulture"/>.
+        /// </summary>
+        [JsonIgnore]
+        public virtual string WeekDayName {
+            get { return DateTimeFormatInfo.CurrentInfo == null ? DayOfWeek + "" : DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek); }
+        }
+
+        /// <summary>
+        /// Gets the name of the weekday according to <see cref="CultureInfo.CurrentCulture"/>. The first character of
+        /// the name will always be uppercase.
+        /// </summary>
+        [JsonIgnore]
+        public virtual string WeekDayNameFirstCharToUpper {
+            get { return WeekDayName.FirstCharToUpper(); }
+        }
+
         #endregion
 
         #region Constructors
 
-        protected OpeningHoursWeekdayItem(JObject obj) : base(obj) {
+        protected OpeningHoursWeekdayItem(JObject obj, DayOfWeek dayOfWeek) : base(obj) {
+            DayOfWeek = dayOfWeek;
             Label = obj.GetString("label") ?? "";
             Items = obj.GetArray("items", OpeningHoursTimeSlot.Parse);
             ParseLegacyValues();
@@ -83,18 +105,19 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
         /// <summary>
         /// Initializes an empty instance for the specified <see cref="DayOfWeek"/>.
         /// </summary>
-        /// <param name="day">The day of the week.</param>
+        /// <param name="dayOfWeek">The day of the week.</param>
         /// <returns>Returns an instance of <see cref="OpeningHoursWeekdayItem"/>.</returns>
-        public static OpeningHoursWeekdayItem GetEmptyModel(DayOfWeek day) {
-            return new OpeningHoursWeekdayItem(JObject.Parse("{label:\"" + day + "\",items:[]}"));
+        public static OpeningHoursWeekdayItem GetEmptyModel(DayOfWeek dayOfWeek) {
+            return new OpeningHoursWeekdayItem(JObject.Parse("{label:\"" + dayOfWeek + "\",items:[]}"), dayOfWeek);
         }
 
         /// <summary>
         /// Gets an instance of <see cref="OpeningHoursTimeSlot"/> from the specified <see cref="JObject"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to parse.</param>
-        public static OpeningHoursWeekdayItem Parse(JObject obj) {
-            return obj == null ? null : new OpeningHoursWeekdayItem(obj);
+        /// <param name="dayOfWeek">The day of the week.</param>
+        public static OpeningHoursWeekdayItem Parse(JObject obj, DayOfWeek dayOfWeek) {
+            return obj == null ? null : new OpeningHoursWeekdayItem(obj, dayOfWeek);
         }
 
         #endregion

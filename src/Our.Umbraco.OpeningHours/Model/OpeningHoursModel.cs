@@ -8,6 +8,7 @@ using Our.Umbraco.OpeningHours.Model.Items;
 using Our.Umbraco.OpeningHours.Model.Json;
 using Our.Umbraco.OpeningHours.Model.Offset;
 using Skybrud.Essentials.Json.Extensions;
+using Umbraco.Core;
 
 namespace Our.Umbraco.OpeningHours.Model {
     
@@ -85,12 +86,15 @@ namespace Our.Umbraco.OpeningHours.Model {
             // Parse the weekdays
             Weekdays = new Dictionary<DayOfWeek, OpeningHoursWeekdayItem>();
             for (int i = 0; i < 7; i++) {
-                Weekdays.Add((DayOfWeek) i, obj.GetObject("weekdays." + i, OpeningHoursWeekdayItem.Parse));
+                DayOfWeek dayOfWeek = (DayOfWeek) i;
+                Weekdays.Add(dayOfWeek, obj.GetObject("weekdays." + i, x => OpeningHoursWeekdayItem.Parse(x, dayOfWeek)));
             }
 
             // Parse holidays
             Holidays = obj.GetArrayItems("holidays", OpeningHoursHolidayItem.Parse);
-            _holidays = Holidays.ToDictionary(x => x.Date.ToString("yyyyMMdd"));
+
+            // Create a dictionary with the holidays - for O(1) lookups
+            _holidays = Holidays.Where(x => x.IsValid).DistinctBy(x => x.Date.ToString("yyyyMMdd")).ToDictionary(x => x.Date.ToString("yyyyMMdd"));
 
         }
 
