@@ -135,6 +135,6 @@ In the Razor example below, the next 10 days are shown whether the store is clos
 
 
 
-[NuGetPackageUrl]: https://www.nuget.org/packages/Our.Umbraco.OpeningHours/1.0.0-beta1
+[NuGetPackageUrl]: https://www.nuget.org/packages/Our.Umbraco.OpeningHours/
 [UmbracoPackageUrl]: https://our.umbraco.org/projects/backoffice-extensions/ourumbracoopeninghours/
-[GitHubReleaseUrl]: https://github.com/bomortensen/Our.Umbraco.OpeningHours/releases/tag/v1.0.0-beta1
+[GitHubReleaseUrl]: https://github.com/bomortensen/Our.Umbraco.OpeningHours/releases/latest
