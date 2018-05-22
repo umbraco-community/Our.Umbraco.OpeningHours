@@ -263,7 +263,7 @@ namespace Our.Umbraco.OpeningHours.Model {
             OpeningHoursDayOffset[] upcomingDays = new OpeningHoursDayOffset[count];
 
             // Iterate through the days one by one
-            for (int i = 0; i < 14; i++) {
+            for (int i = 0; i < count; i++) {
 
                 // Get the current timestamp (according to the specified time zone)
                 DateTimeOffset timeZoneNow = TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow, timeZone);
