@@ -7,28 +7,53 @@ using Our.Umbraco.OpeningHours.Model;
 
 namespace Our.Umbraco.OpeningHours.Converters
 {
-    [PropertyValueType(typeof(OpeningHoursModel))]
-    [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
-    public class OpeningHoursValueConverter : PropertyValueConverterBase
+    public class OpeningHoursValueConverter : IPropertyValueConverter
     {
-        public override bool IsConverter(PublishedPropertyType propertyType)
+        private readonly ILogger _logger;
+
+        public OpeningHoursValueConverter(ILogger logger)
         {
-            return propertyType.PropertyEditorAlias.InvariantEquals("OpeningHours");
+            _logger = logger;
         }
 
-        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
+        public bool IsConverter(PublishedPropertyType propertyType)
+        {
+            return propertyType.EditorAlias.Equals("OpeningHours");
+        } 
+
+        public bool? IsValue(object value, PropertyValueLevel level)
+        {
+            return true;
+        }
+
+        public Type GetPropertyValueType(PublishedPropertyType propertyType) => typeof(OpeningHoursModel);
+
+        public object ConvertSourceToIntermediate(IPublishedElement owner, PublishedPropertyType propertyType, object source, bool preview)
+        {
+            return source;
+        }
+
+        public object ConvertIntermediateToObject(IPublishedElement owner, PublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview)
         {
             try
             {
-                return Model.OpeningHoursModel.Deserialize(source as string);
+                return OpeningHoursModel.Deserialize(inter as string);
             }
             catch (Exception e)
             {
-                LogHelper.Error<OpeningHoursValueConverter>("Error converting value", e);
+                _logger.Error<OpeningHoursValueConverter>("Error converting value", e);
             }
 
             // Create default model
-            return new Model.OpeningHoursModel();
+            return new OpeningHoursModel();
         }
+
+        public object ConvertIntermediateToXPath(IPublishedElement owner, PublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview)
+        {
+            return inter.ToString();
+        }
+
+        public PropertyCacheLevel GetPropertyCacheLevel(PublishedPropertyType propertyType) => PropertyCacheLevel.Element;
+
     }
 }

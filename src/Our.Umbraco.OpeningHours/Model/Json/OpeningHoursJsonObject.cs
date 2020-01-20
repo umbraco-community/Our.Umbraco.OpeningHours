@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json;
+using Our.Umbraco.OpeningHours.Json;
 
 namespace Our.Umbraco.OpeningHours.Model.Json {
     
