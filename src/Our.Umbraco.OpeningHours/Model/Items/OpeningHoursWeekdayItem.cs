@@ -2,9 +2,12 @@
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json;
+//using Newtonsoft.Json.Linq;
+using Our.Umbraco.OpeningHours.Extensions;
 using Our.Umbraco.OpeningHours.Model.Json;
-using Skybrud.Essentials.Json.Extensions;
-using Skybrud.Essentials.Strings.Extensions;
+using Umbraco.Core;
 
 namespace Our.Umbraco.OpeningHours.Model.Items {
     
@@ -64,7 +67,7 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
         /// </summary>
         [JsonIgnore]
         public virtual string WeekDayNameFirstCharToUpper {
-            get { return WeekDayName.FirstCharToUpper(); }
+            get { return WeekDayName.ToFirstUpper(); }
         }
 
         #endregion

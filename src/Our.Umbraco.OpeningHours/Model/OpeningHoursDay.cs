@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using Our.Umbraco.OpeningHours.Extensions;
 using Our.Umbraco.OpeningHours.Model.Items;
-using Skybrud.Essentials.Strings.Extensions;
+using Umbraco.Core;
 
 namespace Our.Umbraco.OpeningHours.Model {
 
@@ -88,7 +88,7 @@ namespace Our.Umbraco.OpeningHours.Model {
         /// the name will always be uppercase.
         /// </summary>
         public string WeekDayNameFirstCharToUpper {
-            get { return WeekDayName.FirstCharToUpper(); }
+            get { return WeekDayName.ToFirstUpper(); }
         }
 
         /// <summary>

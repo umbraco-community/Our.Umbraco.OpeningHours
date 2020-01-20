@@ -13,3 +13,5 @@ artifacts/
 src/packages/
 node_modules/
 releases/files/
+src/.vs/Our.Umbraco.OpeningHours/v16/
+src/.vs/Our.Umbraco.OpeningHours/config/

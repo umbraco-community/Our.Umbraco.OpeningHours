@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Our.Umbraco.OpeningHours.Json;
-using Skybrud.Essentials.Json.Extensions;
 
 namespace Our.Umbraco.OpeningHours.Model.Items {
     
@@ -38,8 +37,11 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
 
         #region Constructors
 
-        protected OpeningHoursHolidayItem(JObject obj) : base(obj, default(DayOfWeek)) {
-            Date = obj.GetString("date", ParseDate);
+        protected OpeningHoursHolidayItem(JObject obj) : base(obj, default(DayOfWeek))
+        {
+            
+            Date = ParseDate(obj["date"]);
+            //Date = obj.GetString("date", ParseDate);
             DayOfWeek = Date.DayOfWeek;
         }
 
@@ -47,9 +49,13 @@ namespace Our.Umbraco.OpeningHours.Model.Items {
 
         #region Static methods
 
-        private DateTime ParseDate(string str) {
+        private DateTime ParseDate(JToken objDate)
+        {
+            if (objDate == null)
+                return default(DateTime);
+
             DateTime date;
-            return DateTime.TryParse(str ?? "", out date) ? date : default(DateTime);
+            return DateTime.TryParse(objDate.Value<string>() ?? "", out date) ? date : default(DateTime);
         }
 
         /// <summary>

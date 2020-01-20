@@ -4,6 +4,7 @@ using Our.Umbraco.OpeningHours.Model;
 using Our.Umbraco.OpeningHours.Model.Items;
 using Our.Umbraco.OpeningHours.Model.Offset;
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
 namespace Our.Umbraco.OpeningHours.Extensions {
@@ -30,7 +31,7 @@ namespace Our.Umbraco.OpeningHours.Extensions {
         /// <param name="propertyAlias">The alias of the property.</param>
         /// <returns>Returns an instance of <see cref="OpeningHoursModel"/>.</returns>
         public static OpeningHoursModel GetOpeningHours(this IPublishedContent content, string propertyAlias) {
-            OpeningHoursModel openingHours = content == null ? null : content.GetPropertyValue<OpeningHoursModel>(propertyAlias);
+            OpeningHoursModel openingHours = content == null ? null : content.Value<OpeningHoursModel>(propertyAlias);
             return openingHours ?? new OpeningHoursModel();
         }
 
